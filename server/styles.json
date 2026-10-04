@@ -1,0 +1,268 @@
+[
+  {
+    "id": "lofi",
+    "name": "窗边咖啡",
+    "subtitle": "Lo-fi · chill beats",
+    "weight": 40,
+    "bpm": [
+      68,
+      80
+    ],
+    "prompt_revision": "2026-09-24-major-v6",
+    "instruments": [
+      "felt piano",
+      "warm Rhodes",
+      "upright bass",
+      "very faint brushed percussion"
+    ],
+    "moods": [
+      "cozy",
+      "unhurried",
+      "mellow"
+    ],
+    "prompts": [
+      "Soft instrumental lo-fi lounge for a quiet afternoon cafe. Warm Rhodes seventh chords and rounded upright bass in the foreground, sparse delicate felt piano phrases, mellow tape warmth. Extremely faint sparse brushed percussion sits far behind the chords, a barely audible slow pulse with no pronounced backbeat. Airy and unhurried, restrained dynamics, no sharp snare, no hi-hats, no busy drums, no vocals, no solo, no big drop.",
+      "Instrumental ambient jazzhop with delicate felt piano chords, hazy Rhodes and soft mellow bass. Almost weightless rhythm, very quiet occasional brush taps, percussion much softer than the piano and pads. Rainy window cafe, spacious tender slow harmonic changes and gentle microvariations. No strong kick, no sharp snare, no cymbals, no drum fills, no singing, no dramatic build.",
+      "Warm instrumental downtempo lounge, hazy electric piano and muted nylon guitar chord fragments over a rounded soft bass. Gentle slow swing is only implied by a barely audible muffled pulse, sparse featherlight brush texture deep in the background. Quiet evening room, low event density and smooth evolving harmony. No prominent beat, no rimshots, no hi-hats, no vocals, no climactic drop."
+    ],
+    "lm_enabled": false,
+    "timesignature": "4",
+    "model_variant": "acestep-v15-turbo"
+  },
+  {
+    "id": "ambient",
+    "name": "云间慢拍",
+    "subtitle": "Ambient · spacious beatless lounge",
+    "weight": 20,
+    "bpm": [
+      56,
+      56
+    ],
+    "keys": ["C Major"],
+    "instruments": [
+      "soft synth pads",
+      "sparse piano",
+      "mellow sustained bass",
+      "bell texture"
+    ],
+    "moods": [
+      "airy",
+      "contented",
+      "unhurried"
+    ],
+    "prompts": [
+      "TrackType: Music, VocalType: Instrumental, Genre: Ambient, Downtempo, Chillout. A spacious very slow instrumental lounge piece at {bpm} BPM, entirely in {key}. Soft luminous analog synthesizer pads breathe beneath sparse warm piano chords and a mellow sustained low bass. Occasional delicate bell-like electronic notes, widely spaced, with long smooth decays. Slow consonant harmonic changes and a coherent small motif, very low event density. A gentle pulse is implied by the piano alone. Open blue sky, floating clouds, warm contentment and quiet hope. Airy natural depth, detailed clean stereo, soft transients and broad breathing spaces. Smooth understated development into a resolved major chord with a lingering ending. No percussion, drums, backbeat, vocals, choir, field recordings, hiss, melancholy minor sections, dramatic builds or climactic drops."
+    ],
+    "lm_enabled": false,
+    "timesignature": "4",
+    "model_variant": "stable-audio-3-medium",
+    "prompt_revision": "2026-09-27-sa3-clouds-approved-v13",
+    "encoding": {
+      "codec": "opus",
+      "bitrate_kbps": 192,
+      "preserve_edges": true
+    },
+    "style_review": "SA3 180-second clouds A/B recipe auditions accepted by user on 2026-09-27; future random seeds still require production QC"
+  },
+  {
+    "id": "daily_piano",
+    "name": "城市晨光",
+    "subtitle": "Solo piano · thawing city",
+    "weight": 10,
+    "bpm": [
+      76,
+      108
+    ],
+    "instruments": [
+      "acoustic grand piano"
+    ],
+    "moods": [
+      "spacious",
+      "hopeful",
+      "awakening"
+    ],
+    "prompts": [
+      "TrackType: Instrument, VocalType: Instrumental, Instrument: Grand Piano, Genre: Classical. An unaccompanied solo acoustic concert grand piano recital at {bpm} BPM. One pianist alone, clear natural hammer attacks and full resonant bass strings. A hopeful lyrical melody in the upper register over flowing left-hand broken chords and low octaves, expressive dynamics from delicate pianissimo to rounded forte. A memorable balanced theme, developed through spacious classical phrases, pauses, modest variations and warm resolved major cadences. Fresh morning light, a thawing winter city slowly coming alive, tranquil confidence and gentle joy. Natural live performance with flexible phrasing and subtle pedal, clean detailed stereo concert-hall acoustics. Entirely solo piano from the first note to the long ringing final chord."
+    ],
+    "prompt_revision": "2026-09-25-sa3-solo-piano-v12",
+    "lm_enabled": false,
+    "encoding": {
+      "codec": "opus",
+      "bitrate_kbps": 192,
+      "preserve_edges": true,
+      "preserve_dynamics": true
+    },
+    "timesignature": "4",
+    "model_variant": "stable-audio-3-medium",
+    "style_review": "SA3 specialist recipe; automated technical/style/tonal screening; human listening acceptance pending"
+  },
+  {
+    "id": "anime_daily",
+    "name": "放学以后",
+    "subtitle": "Piano & electronics · everyday romance",
+    "weight": 8,
+    "bpm": [
+      78,
+      108
+    ],
+    "instruments": [
+      "acoustic piano",
+      "delicate digital synthesizer"
+    ],
+    "moods": [
+      "romantic",
+      "youthful",
+      "everyday"
+    ],
+    "prompts": [
+      "Instrumental romantic slice-of-life anime original soundtrack. Clear acoustic piano plays a tender memorable melody with playful answering phrases, delicate digital synth chimes and translucent electronic tones. Everyday school memories and shy first love, warm luminous major harmonies, gentle flowing motion, natural pauses. Bright clear soundtrack production, piano prominent and electronics subtle."
+    ],
+    "prompt_revision": "2026-09-24-major-v6",
+    "lm_enabled": false,
+    "encoding": {
+      "codec": "opus",
+      "bitrate_kbps": 192
+    },
+    "timesignature": "4",
+    "model_variant": "acestep-v15-sft"
+  },
+  {
+    "id": "orchestral",
+    "name": "庭园来信",
+    "subtitle": "Symphonic · hopeful horizons",
+    "weight": 3,
+    "bpm": [
+      66,
+      96
+    ],
+    "instruments": [
+      "symphonic strings",
+      "flute and oboe",
+      "clarinet and bassoon",
+      "warm French horns",
+      "harp",
+      "acoustic piano"
+    ],
+    "moods": [
+      "hopeful",
+      "generous",
+      "majestic",
+      "tender"
+    ],
+    "prompts": [
+      "TrackType: Music. VocalType: Instrumental. Genre: Classical, Orchestral, Anime Soundtrack. A warm lyrical symphonic piece at {bpm} BPM, noble, tender, expansive and hopeful. A memorable long-breathed major-key theme grows from intimate woodwind phrases into broad luminous orchestral passages. Singing violins and cellos, flute and oboe answering melodies, clarinet and bassoon inner voices, mellow French horns, delicate harp and acoustic piano. Rich acoustic ensemble interplay with clear melodic direction and spacious phrasing. Sunlit green valleys, a heartfelt letter, reunion and a wide world opening. Graceful swells and generous natural dynamics, bright resolved cadences, a tranquil resonant ending. Pristine stereo concert-hall depth. Entirely instrumental acoustic orchestra, without choir, vocals, drum loops, electronic beats or ominous tragic passages."
+    ],
+    "prompt_revision": "2026-09-25-sa3-specialists-v11",
+    "lm_enabled": false,
+    "encoding": {
+      "codec": "opus",
+      "bitrate_kbps": 192,
+      "preserve_edges": true,
+      "preserve_dynamics": true
+    },
+    "timesignature": "4",
+    "model_variant": "stable-audio-3-medium",
+    "style_review": "SA3 specialist recipe; automated technical/style/tonal screening; human listening acceptance pending"
+  },
+  {
+    "id": "guzheng",
+    "name": "空谷听泉",
+    "subtitle": "Chinese ethereal · 琴筝与箫",
+    "weight": 7,
+    "bpm": null,
+    "instruments": [
+      "guqin",
+      "guzheng",
+      "xiao flute"
+    ],
+    "moods": [
+      "serene",
+      "luminous",
+      "spacious"
+    ],
+    "prompts": [
+      "TrackType: Music, VocalType: Instrumental, Genre: Chinese, Chinese Ethereal. Serene, mellow, dreamy, calm, luminous. An unaccompanied guqin and guzheng duet. Chinese gong-mode major pentatonic melody, grounded and gently uplifting. Slow sanban free rhythm, unmetered rubato, very sparse notes and spacious pauses. Deep resonant low plucked strings ring beneath distant crystalline high harmonics, a wide separation of registers. Each simple phrase returns to a stable tonal home; each note blooms and decays fully into silence. A few expressive pitch bends, restrained ornamentation. Quiet intimacy opens into majestic breadth through natural acoustic resonance and wide dynamics. Clean high-fidelity stereo recording with clear attacks, long delicate string decay and airy natural room depth. Only the two acoustic zithers; percussion-free, beatless, voice-free, without field recordings or background sound effects. A patient complete instrumental piece ending in a long resonant decay.",
+      "TrackType: Music, VocalType: Instrumental, Genre: Chinese, Chinese Ethereal. Serene, mellow, dreamy, calm, radiant. A sparse traditional Chinese instrumental trio of low guqin, guzheng and bamboo xiao flute. Warm deep zither notes sustain beneath a clear high flute melody and occasional shimmering guzheng harmonics. Chinese major pentatonic gong mode, a simple coherent motif with gentle returns to the tonic. Slow sanban, freely breathing unmetered phrases separated by long rests. Very low event density: one phrase at a time, few overlapping attacks. Long natural decays, expressive breath, a wide bass-to-treble register and broad soft-to-full dynamics. Spacious mountain-like scale from acoustic depth, clean open stereo and subtle distant reflections. Graceful and quietly majestic, peaceful and hopeful. Exclusively these acoustic instruments; no percussion, drums, rhythmic backing, vocals, orchestral layers, birds or water recordings. High-fidelity production and a naturally decaying ending."
+    ],
+    "prompt_revision": "2026-09-25-sa3-approved-v10",
+    "model_variant": "stable-audio-3-medium",
+    "lm_enabled": false,
+    "timesignature": "free",
+    "tonal_policy": "gong-pentatonic-prompt-only",
+    "encoding": {
+      "codec": "flac",
+      "preserve_dynamics": true,
+      "preserve_edges": true
+    },
+    "style_review": "SA3 90-second recipe auditions accepted by user on 2026-09-25; individual tracks use technical QC and duplicate screening"
+  },
+  {
+    "id": "guitar",
+    "name": "木色午后",
+    "subtitle": "Solo steel-string · fingerstyle",
+    "weight": 7,
+    "bpm": [
+      90,
+      120
+    ],
+    "instruments": [
+      "solo steel-string acoustic guitar"
+    ],
+    "moods": [
+      "grounded",
+      "sunny",
+      "intimate",
+      "easygoing"
+    ],
+    "prompts": [
+      "TrackType: Instrument. VocalType: Instrumental. Genre: Acoustic, Folk, Fingerstyle Guitar. One solo steel-string acoustic guitar played by one seated guitarist, unaccompanied. A warm plainspoken folk melody at {bpm} BPM, relaxed steady alternating thumb bass supporting a clear upper-string tune. Sunny, grounded, intimate and easygoing. Simple memorable major-key phrases, gentle repeated motifs and modest variations, comfortable walking pulse, unhurried breathing spaces. Rounded low strings and singing treble notes with natural open-string sustain, subtle finger movement and warm wooden body resonance. Consistent solo performance with a graceful introduction and resolved ringing final chord. Close clean high-fidelity stereo recording with light natural room ambience. Exclusively one acoustic guitar, without overdubs, other instruments, percussion, body tapping, vocals or effects."
+    ],
+    "prompt_revision": "2026-09-25-sa3-specialists-v11",
+    "lm_enabled": false,
+    "encoding": {
+      "codec": "opus",
+      "bitrate_kbps": 256,
+      "preserve_edges": true,
+      "preserve_dynamics": true
+    },
+    "timesignature": "4",
+    "model_variant": "stable-audio-3-medium",
+    "style_review": "SA3 specialist recipe; automated technical/style/tonal screening; human listening acceptance pending"
+  },
+  {
+    "id": "artcore",
+    "name": "星河涌动",
+    "subtitle": "Artcore · fast electronic",
+    "weight": 5,
+    "bpm": [
+      170,
+      220
+    ],
+    "instruments": [
+      "breakbeats",
+      "synth leads",
+      "electronic bass",
+      "piano arpeggios",
+      "digital textures"
+    ],
+    "moods": [
+      "joyful",
+      "energetic",
+      "playful",
+      "luminous"
+    ],
+    "prompts": [
+      "TrackType: Music. VocalType: Instrumental. Genre: Electronic, Artcore, Drum and Bass, Anime Game Soundtrack. Bright exuberant melodic artcore at {bpm} BPM in driving double time. Fast intricate chopped breakbeats, crisp snare rolls, clean deep electronic bass, vivid synthesizer leads and euphoric major chords. Sparkling piano arpeggios trade a coherent joyful hook with layered digital synths and playful electronic counterpoint. Youthful optimistic futuristic-city adventure, colorful and exhilarating. An evolving complete instrumental: clear opening motif, energetic rhythmic development, spacious piano interlude, triumphant return and resolved ending. Electronic instruments dominate, precise rhythmic detail, wide stereo clarity, punchy high-fidelity production. Bright major harmony throughout, no melancholic breakdown, vocals, lo-fi filtering or acoustic folk accompaniment."
+    ],
+    "prompt_revision": "2026-09-25-sa3-specialists-v11",
+    "lm_enabled": false,
+    "encoding": {
+      "codec": "opus",
+      "bitrate_kbps": 256,
+      "preserve_edges": true
+    },
+    "timesignature": "4",
+    "model_variant": "stable-audio-3-medium",
+    "style_review": "SA3 specialist recipe; automated technical/style/tonal screening; human listening acceptance pending"
+  }
+]

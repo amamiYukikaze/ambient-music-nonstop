@@ -1,0 +1,23 @@
+{
+  "name": "ambient-music-nonstop",
+  "productName": "Ambient Music Nonstop",
+  "version": "1.0.0",
+  "description": "A quiet, evolving sound environment for home",
+  "private": true,
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "package": "node scripts/package.cjs",
+    "icons": "electron scripts/render-brand.cjs",
+    "test:mix": "node scripts/test-mix.mjs",
+    "test:release": "node --test tests/*.test.cjs",
+    "export:github": "node scripts/export-github.cjs",
+    "verify:source": "node scripts/verify-source.cjs"
+  },
+  "devDependencies": {
+    "electron": "44.4.5",
+    "@electron/packager": "20.3.0",
+    "@playwright/test": "1.63.0"
+  },
+  "license": "AGPL-3.0-only"
+}

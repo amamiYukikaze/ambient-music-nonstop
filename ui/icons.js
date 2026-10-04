@@ -1,0 +1,4 @@
+/** Small, optically centered transport marks; button hit areas stay generous. */
+const paths={play:'<path d="M9 6.6a.6.6 0 0 1 .9-.52l8.1 5.4a.62.62 0 0 1 0 1.04l-8.1 5.4a.6.6 0 0 1-.9-.52Z"/>',pause:'<path d="M9 6.5v11M15 6.5v11"/>',next:'<path d="m7 6.5 8 5.5-8 5.5Z"/><path d="M18 6.5v11"/>',delete:'<path d="M5.5 7h13M9 7V4.8h6V7M7.5 7l.7 12h7.6l.7-12M10.2 10.5v5M13.8 10.5v5"/>'};
+function icon(name){const host=document.createElement('span');host.innerHTML=`<svg class="transport-icon ${name}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]}</svg>`;return host.firstChild;}
+export function transportIcons(){for(const id of ['play']){const button=document.getElementById(id);for(const name of ['play','pause'])button.querySelector('.glyph-'+name).replaceChildren(icon(name));}for(const id of ['delete','next'])document.getElementById(id).replaceChildren(icon(id));}

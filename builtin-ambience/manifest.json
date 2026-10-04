@@ -1,0 +1,228 @@
+[
+  {
+    "id": "beach",
+    "file": "beach.opus",
+    "sha256": "8c7dba9328b2b55e450a2760b144b5eaa57db4c7d87651d21d580259649c5bb4",
+    "sources": [
+      {
+        "url": "https://freesound.org/people/Rmutt/sounds/156598/",
+        "license": "CC0-1.0",
+        "author": "Rmutt",
+        "download": "https://raw.githubusercontent.com/twtrubiks/moonseal/main/public/audio/ocean.mp3",
+        "source_id": "freesound-156598"
+      },
+      {
+        "url": "https://freesound.org/people/felix.blume/sounds/217506/",
+        "license": "CC0-1.0",
+        "author": "felix.blume; edited by Porrumentzio",
+        "download": "https://raw.githubusercontent.com/rafaelmardojai/blanket/master/data/resources/sounds/wind.ogg",
+        "source_id": "freesound-217506"
+      }
+    ],
+    "processing": "62s excerpt or repeated source, 2s linear seam crossfade, normalized -24 LUFS, lowpass; snow is wind, fireflies are night insects"
+  },
+  {
+    "id": "ocean",
+    "file": "ocean.opus",
+    "sha256": "5f2b728b9e204d4429480485bbcb2e2692d22f9705b50ffa82a0c3b70408f73a",
+    "sources": [
+      {
+        "url": "https://freesound.org/people/Rmutt/sounds/156598/",
+        "license": "CC0-1.0",
+        "author": "Rmutt",
+        "download": "https://raw.githubusercontent.com/twtrubiks/moonseal/main/public/audio/ocean.mp3",
+        "source_id": "freesound-156598"
+      }
+    ],
+    "processing": "62s excerpt or repeated source, 2s linear seam crossfade, normalized -24 LUFS, lowpass; snow is wind, fireflies are night insects"
+  },
+  {
+    "id": "birds",
+    "file": "birds.opus",
+    "sha256": "75d5a85cb7fd2590281d1532179dd176f669a30d83253f79b884d87f24cdd6f7",
+    "sources": [
+      {
+        "url": "https://freesound.org/people/kvgarlic/sounds/156826/",
+        "license": "CC0-1.0",
+        "author": "kvgarlic; edited by Porrumentzio",
+        "download": "https://raw.githubusercontent.com/rafaelmardojai/blanket/master/data/resources/sounds/birds.ogg",
+        "source_id": "freesound-156826"
+      }
+    ],
+    "processing": "62s excerpt or repeated source, 2s linear seam crossfade, normalized -24 LUFS, lowpass; snow is wind, fireflies are night insects"
+  },
+  {
+    "id": "campfire",
+    "file": "campfire.opus",
+    "sha256": "c2c78853e16cb339f6b44961807a502d7596868b18b22bf2315eeafcf60822fe",
+    "sources": [
+      {
+        "url": "https://soundbible.com/1543-Fireplace.html",
+        "license": "Public Domain",
+        "author": "ezwa",
+        "download": "https://raw.githubusercontent.com/rafaelmardojai/blanket/master/data/resources/sounds/fireplace.ogg",
+        "source_id": "soundbible-1543"
+      },
+      {
+        "url": "https://freesound.org/people/felix.blume/sounds/217506/",
+        "license": "CC0-1.0",
+        "author": "felix.blume; edited by Porrumentzio",
+        "download": "https://raw.githubusercontent.com/rafaelmardojai/blanket/master/data/resources/sounds/wind.ogg",
+        "source_id": "freesound-217506"
+      }
+    ],
+    "processing": "62s excerpt or repeated source, 2s linear seam crossfade, normalized -24 LUFS, lowpass; snow is wind, fireflies are night insects"
+  },
+  {
+    "id": "fireplace",
+    "file": "fireplace.opus",
+    "sha256": "04d9e70fe838af0dca54785b5c3d99d2daafb4c0e8f85bf86bbc955e4ad677b9",
+    "sources": [
+      {
+        "url": "https://soundbible.com/1543-Fireplace.html",
+        "license": "Public Domain",
+        "author": "ezwa",
+        "download": "https://raw.githubusercontent.com/rafaelmardojai/blanket/master/data/resources/sounds/fireplace.ogg",
+        "source_id": "soundbible-1543"
+      }
+    ],
+    "processing": "62s excerpt or repeated source, 2s linear seam crossfade, normalized -24 LUFS, lowpass; snow is wind, fireflies are night insects"
+  },
+  {
+    "id": "forest",
+    "file": "forest.opus",
+    "sha256": "59eb077511073d34fa25fd82be1479006d2d2cd13e486d6be0c95bf4701faf3e",
+    "sources": [
+      {
+        "url": "https://freesound.org/people/kvgarlic/sounds/156826/",
+        "license": "CC0-1.0",
+        "author": "kvgarlic; edited by Porrumentzio",
+        "download": "https://raw.githubusercontent.com/rafaelmardojai/blanket/master/data/resources/sounds/birds.ogg",
+        "source_id": "freesound-156826"
+      },
+      {
+        "url": "https://freesound.org/people/felix.blume/sounds/217506/",
+        "license": "CC0-1.0",
+        "author": "felix.blume; edited by Porrumentzio",
+        "download": "https://raw.githubusercontent.com/rafaelmardojai/blanket/master/data/resources/sounds/wind.ogg",
+        "source_id": "freesound-217506"
+      }
+    ],
+    "processing": "62s excerpt or repeated source, 2s linear seam crossfade, normalized -24 LUFS, lowpass; snow is wind, fireflies are night insects"
+  },
+  {
+    "id": "rain",
+    "file": "rain.opus",
+    "sha256": "6dc5a3670a918d46149bd6b069583e613a632c87d5f073238a33b86eac35c592",
+    "sources": [
+      {
+        "url": "https://freesound.org/people/noiseloop/sounds/455103/",
+        "license": "CC0-1.0",
+        "author": "noiseloop",
+        "download": "https://cdn.freesound.org/previews/455/455103_8138660-hq.mp3",
+        "source_id": "freesound-455103"
+      },
+      {
+        "url": "https://freesound.org/people/Silencyo/sounds/81818/",
+        "license": "CC0-1.0",
+        "author": "Silencyo",
+        "download": "https://raw.githubusercontent.com/twtrubiks/moonseal/main/public/audio/rain.mp3",
+        "source_id": "freesound-81818"
+      }
+    ],
+    "processing": "CC0 HQ MP3 preview; roof drops 110Hz highpass / +2dB at 1.8kHz / 10kHz lowpass; 27s seam-closed roof loop over original rain at 0.28 gain; 120s loop with 2s seam; -24 LUFS, 128kbps Opus",
+    "revision": "2026-09-24-roof-drops",
+    "description": "近处屋顶与屋顶窗雨滴，叠加较轻的连续雨幕。"
+  },
+  {
+    "id": "stream",
+    "file": "stream.opus",
+    "sha256": "ee2f12b8f9d4d4cb2df51840b2c458b81abf526b14c336adff0a07444c25382a",
+    "sources": [
+      {
+        "url": "https://freesound.org/people/gluckose/sounds/333987/",
+        "license": "CC0-1.0",
+        "author": "gluckose",
+        "download": "https://raw.githubusercontent.com/rafaelmardojai/blanket/master/data/resources/sounds/stream.ogg",
+        "source_id": "freesound-333987"
+      }
+    ],
+    "processing": "62s excerpt or repeated source, 2s linear seam crossfade, normalized -24 LUFS, lowpass; snow is wind, fireflies are night insects"
+  },
+  {
+    "id": "fireflies",
+    "file": "fireflies.opus",
+    "sha256": "e9a60d5ff9ec2dee8466c592e4a1de5f1df711264435cfe202f89c74f2f6d2ae",
+    "sources": [
+      {
+        "url": "https://soundbible.com/2083-Crickets-Chirping-At-Night.html",
+        "license": "Public Domain",
+        "author": "Lisa Redfern",
+        "download": "https://raw.githubusercontent.com/rafaelmardojai/blanket/master/data/resources/sounds/summer-night.ogg",
+        "source_id": "soundbible-2083"
+      }
+    ],
+    "processing": "62s excerpt or repeated source, 2s linear seam crossfade, normalized -24 LUFS, lowpass; snow is wind, fireflies are night insects"
+  },
+  {
+    "id": "snow",
+    "file": "snow.opus",
+    "sha256": "9ea0397b5b4f2a989d43dd1287d0142ab3d0eed66f4a63790aeefe7497242fd1",
+    "sources": [
+      {
+        "url": "https://freesound.org/people/felix.blume/sounds/217506/",
+        "license": "CC0-1.0",
+        "author": "felix.blume; edited by Porrumentzio",
+        "download": "https://raw.githubusercontent.com/rafaelmardojai/blanket/master/data/resources/sounds/wind.ogg",
+        "source_id": "freesound-217506"
+      }
+    ],
+    "processing": "62s excerpt or repeated source, 2s linear seam crossfade, normalized -24 LUFS, lowpass; snow is wind, fireflies are night insects"
+  },
+  {
+    "id": "train",
+    "file": "train.opus",
+    "sha256": "e5995b9b36223fd8890288787e126ca9a5253f4daee46f869efae017cb3f84fd",
+    "sources": [
+      {
+        "url": "https://freesound.org/people/SDLx/sounds/259988/",
+        "license": "CC-BY-3.0",
+        "author": "SDLx",
+        "download": "https://raw.githubusercontent.com/rafaelmardojai/blanket/master/data/resources/sounds/train.ogg",
+        "source_id": "freesound-259988"
+      }
+    ],
+    "processing": "62s excerpt or repeated source, 2s linear seam crossfade, normalized -24 LUFS, lowpass; snow is wind, fireflies are night insects"
+  },
+  {
+    "id": "wind",
+    "file": "wind.opus",
+    "sha256": "a7879923cf402c42711fad112dbfb6967336aab17beb5ed3925fea9af91148d3",
+    "sources": [
+      {
+        "url": "https://freesound.org/people/felix.blume/sounds/217506/",
+        "license": "CC0-1.0",
+        "author": "felix.blume; edited by Porrumentzio",
+        "download": "https://raw.githubusercontent.com/rafaelmardojai/blanket/master/data/resources/sounds/wind.ogg",
+        "source_id": "freesound-217506"
+      }
+    ],
+    "processing": "62s excerpt or repeated source, 2s linear seam crossfade, normalized -24 LUFS, lowpass; snow is wind, fireflies are night insects"
+  },
+  {
+    "id": "thunder",
+    "file": "thunder.opus",
+    "sha256": "90996690fd0a92c00413362cdc88ff4d023852d4c426156c95539e5c9b536df7",
+    "sources": [
+      {
+        "url": "https://freesound.org/people/digifishmusic/sounds/41739/",
+        "license": "CC-BY-4.0",
+        "author": "digifishmusic",
+        "download": "https://cdn.freesound.org/previews/41/41739_29541-hq.mp3",
+        "source_id": "freesound-41739"
+      }
+    ],
+    "processing": "Official HQ MP3 preview repeated to 62 seconds; 12 kHz lowpass; 2 second linear seam crossfade; normalized to -24 LUFS, -3 dBTP; 48 kHz stereo Opus at 96 kbps, 60 second loop.",
+    "revision": "2026-10-04-ccby4-reacquired"
+  }
+]

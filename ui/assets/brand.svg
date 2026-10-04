@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title">
+  <title id="title">栖声 · 立鹤</title>
+  <defs>
+    <clipPath id="night"><path d="M101 512a411 411 0 0 1 822 0Z"/></clipPath>
+    <g id="crane">
+      <path d="M757 252 638 238C623 208 583 196 554 213 515 235 507 278 529 321L564 386C582 417 559 435 532 433 509 415 475 403 438 407 376 407 329 435 299 467L252 507C286 503 316 491 338 477 352 515 386 539 429 544 462 548 492 533 514 518 549 499 589 478 605 444 625 404 599 370 578 339 557 307 549 279 565 263 578 249 597 250 608 264L637 270Z"/>
+      <g fill="none" stroke="currentColor" stroke-width="21" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m445 535-10 219 27 47m-27-47-30 47m30-47 1 51"/>
+        <path d="m490 531 59 112-53 72"/>
+      </g>
+    </g>
+  </defs>
+  <circle cx="512" cy="512" r="444" fill="#f5f3ee"/>
+  <path d="M101 512a411 411 0 0 1 822 0Z" fill="#182329"/>
+  <use href="#crane" fill="#182329" color="#182329"/>
+  <use href="#crane" fill="#f5f3ee" color="#f5f3ee" clip-path="url(#night)"/>
+</svg>

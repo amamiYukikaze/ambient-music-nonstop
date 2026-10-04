@@ -1,0 +1,84 @@
+/* Home and both settings rooms share a window, and one set of playback controls. */
+body:is([data-view=settings],[data-view=advanced]) #wallpaper-stack{transform:scale(1.08) translateY(-2%)}
+.settings-wash{background:linear-gradient(115deg,#0c1720df,#141d27b3 55%,#191b248c)}
+#advanced{background:linear-gradient(120deg,#0c1c272b,#15253338 65%,#1d243438)}
+body[data-view=advanced] .settings-wash{opacity:1}
+.scene-copy{top:clamp(126px,20vh,265px);max-width:60vw}
+#clock{display:block;width:max-content;font-size:clamp(19.8px,2.1vw,31.8px);font-weight:400;line-height:1.1;letter-spacing:1px;margin:0 0 15px;color:#fff3df;text-shadow:0 2px 6px #04111e9c,0 5px 20px #09182d73}
+.clock-colon{display:inline-block;opacity:.3;animation:clock-tick 2s ease-in-out infinite}
+@keyframes clock-tick{0%,100%{opacity:.3}50%{opacity:0}}
+body.reduced .clock-colon{animation:none;opacity:.3}
+.scene-copy .eyebrow{font-size:9px;letter-spacing:2.3px;margin-bottom:12px}
+.scene-copy h1{font-size:clamp(22px,2.2vw,32px)}
+.scene-copy .scene-tags{margin-top:20px}
+.transport-anchor{width:358px;height:74px;flex:none;pointer-events:none}
+#room-transport{position:fixed;left:0;top:0;z-index:4;width:358px;height:74px;display:flex;align-items:center;justify-content:center;gap:24px;opacity:0;pointer-events:none;transition:opacity .7s}
+#room-transport[data-ready=true]{opacity:1;pointer-events:auto}
+#room-transport .transport{gap:14px}
+#room-transport .volume{width:122px;flex:none;--lift:2px}
+#room-transport .volume label{font-size:11px;margin-bottom:11px;color:#d8dfde}
+#room-transport .icon{width:42px;height:42px}
+#room-transport button.play{width:59px;height:59px}
+.player{animation-name:player-appear}
+@keyframes player-appear{from{opacity:0}to{opacity:1}}
+body.setup-pending #room-transport{visibility:hidden}
+.settings-footer{display:flex;justify-content:space-between}
+.settings-now #mini-track{display:none}
+.settings-now,.advanced-header .settings-now{flex:none;gap:16px;animation:none!important}
+.settings-header{gap:20px}
+.settings-header>div:first-child,#advanced .advanced-header>div:first-child{min-width:0}
+.settings-header h2{font-size:clamp(21px,2.1vw,30px);letter-spacing:1px}
+#advanced .advanced-header{gap:20px}
+#advanced .advanced-header h2{font-size:clamp(21px,2.1vw,32px);letter-spacing:1px}
+#advanced button.advanced-back{padding:14px 16px;gap:8px;white-space:nowrap}
+.advanced-back{animation:float 12s ease-in-out infinite;--lift:3px;--tilt:.08deg;animation-delay:-6s}
+#advanced footer.advanced-footer{margin-top:0;padding-bottom:10px}
+/* The card owns hover illumination, including the padded edge and the slider. */
+.ambience-item{position:relative;isolation:isolate;overflow:visible;border-radius:20px;--lift:5px;--tilt:.2deg;animation-duration:10.5s}
+.ambience-item:before{content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:radial-gradient(ellipse at 15% 0,#fff1cf28,transparent 75%),linear-gradient(120deg,#d8eaf012,#fff4cc08);opacity:0;transition:opacity .55s}
+.ambience-item:is(:hover,:focus-within){border-color:#eeddb05c;box-shadow:inset 0 1px #fff3,0 10px 26px #0717222e}
+.ambience-item:is(:hover,:focus-within):before{opacity:1}
+.ambience-item button,.ambience-item button:hover,.ambience-item button:active{background:transparent;box-shadow:none;scale:1;border-radius:inherit;outline-offset:4px}
+.ambience-item input{position:relative}
+/* Independently phased breathing; never animate a whole scrolling container. */
+.settings-page :is(.column-heading,.output-heading,.scene-controls>label,.switch-label,.library-tabs,.pool-legend-item,.refill-note,.library-note,.text-button),.settings-now,#advanced :is(.advanced-header>div,.section-heading,.draft-status){animation:float 12s ease-in-out infinite;--lift:3px;--tilt:.06deg;--phase:-4s;animation-delay:var(--phase)}
+.settings-page :is(.column-heading,.scene-controls>label,.pool-legend-item):nth-child(2n){--phase:-8s;animation-duration:14s;--lift:4px}
+.settings-page .ambience-item:nth-child(4n+1){animation-delay:-1s;animation-duration:10s;--lift:5px}
+.settings-page .ambience-item:nth-child(4n+2){animation-delay:-4s;animation-duration:12s;--lift:4px}
+.settings-page .ambience-item:nth-child(4n+3){animation-delay:-7s;animation-duration:11s;--lift:6px}
+.settings-page .ambience-item:nth-child(4n){animation-delay:-9s;animation-duration:13s;--lift:5px}
+.settings-page :is(.scene-controls>label:focus-within,.switch-label:hover,.text-button:hover),[data-interacting]{animation-play-state:paused!important}
+.settings-page .scene-controls .glass{animation:none}
+/* The selected tab is the highlight. There is no detached travelling rectangle. */
+#advanced nav .advanced-tab{transform-origin:50% 60%;transition:color .4s,border-color .5s,background-color .45s,box-shadow .5s;animation:float 11s ease-in-out infinite;--lift:2px;--tilt:.07deg;animation-delay:-3s}
+#advanced nav .advanced-tab:nth-child(2n){animation-delay:-7s;animation-duration:13s}
+#advanced nav .advanced-tab:hover,#advanced nav .advanced-tab:focus-visible{animation-play-state:paused}
+#advanced nav .advanced-tab[aria-selected=true]{color:#fff0c9;border-color:#ffedc65c;background:radial-gradient(ellipse at 20% 0,#f7e5b431,transparent 85%),linear-gradient(125deg,#d1c09b20,#c8dce914);box-shadow:inset 0 1px 1px #ffefd854,inset 0 -1px 1px #bdd7d721,0 5px 25px #eed1a011}
+#advanced nav .advanced-tab:active{scale:1}
+#advanced nav .advanced-tab svg{transition:transform .8s var(--ease)}
+/* Give animated surfaces room inside their scroll clips, without moving the text grid. */
+.ambience-column.scroll-area{padding:14px 23px 18px 20px;margin:-10px -18px -14px -20px;overflow-x:hidden}
+.library-column.scroll-area{padding-top:10px;padding-bottom:14px;padding-right:23px;margin-top:-10px;margin-bottom:-14px;margin-right:-18px;overflow-x:hidden}
+#advanced .advanced-section{left:-18px;right:-15px;padding-left:20px;padding-right:23px}
+.setup-page #setup-content{padding:14px 24px 24px;margin:0 -20px;overflow-x:hidden}
+.glass-popover{padding:23px;overflow-x:hidden}
+.volume-popover{padding:25px 28px}
+.now-playing h2{overflow:visible;min-width:0}
+.title-trigger #track-title{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.title-bubbles{flex-shrink:0}
+.library-tabs{gap:12px;border:0;padding:9px 2px 12px;animation:none!important}
+.library-tabs button.glass{display:flex;align-items:center;justify-content:center;gap:9px;min-width:112px;width:auto;padding:12px 19px;border-radius:18px;line-height:1.3;color:#aebdc2;background:linear-gradient(135deg,#e5edf011,#fff2d006);border:1px solid #e8f0ef24;box-shadow:inset 0 1px #fff1,0 6px 18px #06132315;transition:color .45s,background-color .5s,border-color .5s,box-shadow .5s}
+.library-tabs button.glass[aria-selected=true]{color:#fff0cb;border-color:#f4ddb35e;background:linear-gradient(125deg,#edd4a331,#c6dbe61c);box-shadow:inset 0 1px #fff1ce3b,0 5px 23px #eed9ac0d}
+.library-tabs button.glass:hover{border-color:#fff3cd70;color:#fff4dc}
+.library-tabs button svg{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.brand-emblem{display:block;width:100%;height:100%;object-fit:contain}
+.setup-orbit:has(.brand-emblem){width:62px;height:62px;flex:none}
+.transfer-orbit:has(.brand-emblem){width:86px;height:86px;margin:0 auto 30px}
+.draft-dialog-mark:has(.brand-emblem){width:60px;height:60px;margin:0 auto 23px}
+.card-symbol:has(.brand-emblem) .brand-emblem{width:32px;height:32px}
+.runtime-brand{width:58px;height:58px;display:block;margin-bottom:24px}
+@media(max-height:790px){.scene-copy{top:16vh}#clock{font-size:19.8px;margin-bottom:13px}.scene-copy .scene-tags{margin-top:14px}}
+@media(max-height:690px){.scene-copy{top:15vh}#clock{font-size:17.4px;margin-bottom:12px}.scene-copy .eyebrow{font-size:8px;margin-bottom:9px}.scene-copy h1{font-size:21px}.scene-copy .scene-tags{margin-top:10px}#advanced .advanced-header{min-height:66px}#advanced .advanced-subtitle{display:none}#advanced nav.advanced-tabs{margin:12px 0}}
+@media(max-width:1100px){.scene-copy{max-width:65vw}.settings-now,.advanced-header .settings-now{gap:8px}#advanced button.advanced-back{padding:12px}.settings-header h2,#advanced .advanced-header h2{font-size:21px}.settings-header{gap:12px}}
+@media(prefers-reduced-motion:reduce){.settings-page *,#advanced nav .advanced-tab,#advanced .advanced-header>div,#advanced .section-heading,#advanced .draft-status{animation:none!important}}
+body.reduced .settings-page *,body.reduced #advanced nav .advanced-tab,body.reduced #advanced .advanced-header>div,body.reduced #advanced .section-heading,body.reduced #advanced .draft-status{animation:none!important}

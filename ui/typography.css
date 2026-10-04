@@ -1,0 +1,17 @@
+/* Unmodified Datto D-DIN, SIL OFL 1.1. Files and notices ship inside the app. */
+@font-face{font-family:D-DIN;src:url('./assets/fonts/D-DIN.woff2') format('woff2');font-style:normal;font-weight:100 500;font-display:swap}
+@font-face{font-family:D-DIN;src:url('./assets/fonts/D-DIN-Bold.woff2') format('woff2');font-style:normal;font-weight:600 900;font-display:swap}
+@font-face{font-family:D-DIN;src:url('./assets/fonts/D-DIN-Italic.woff2') format('woff2');font-style:italic;font-weight:100 900;font-display:swap}
+:root{--room-font:'D-DIN','Microsoft YaHei UI','Segoe UI Emoji',sans-serif;font-family:var(--room-font);font-kerning:normal;text-rendering:optimizeLegibility}
+body,button,input,textarea,select,output,pre,code,.scene-copy h1,#advanced #recipe-json{font-family:var(--room-font)}
+body{font-variant-numeric:lining-nums;text-shadow:0 1px 3px #020b1380,0 3px 14px #06111e66}
+button,input,textarea,select,output,pre,code{text-shadow:inherit}
+.eyebrow{font-weight:400;letter-spacing:2.1px;line-height:1.6}
+.home-page :is(.brand,.scene-copy,.section-caption,.player-bottom,.home-footer),#room-transport{text-shadow:0 2px 4px #020b13b3,0 4px 22px #041326a6}
+.scene-copy h1{text-shadow:0 2px 5px #020b13b3,0 4px 24px #041326a6}
+.brand small{font-size:9px;letter-spacing:2.9px}
+.scene-tags{letter-spacing:.65px;line-height:1.7}
+#track-info,.fine,.event{line-height:1.85;letter-spacing:.12px}
+.metric strong,.timeline,output,#clock{font-variant-numeric:tabular-nums}
+.sound-symbol,.ambience-item button>span:first-child{font-family:'Segoe UI Symbol',sans-serif;font-variant-emoji:text}
+::placeholder{text-shadow:inherit}

@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "runtime_version": 1,
+  "python": "3.11.16",
+  "uv": {
+    "url": "https://github.com/astral-sh/uv/releases/download/0.12.17/uv-x86_64-pc-windows-msvc.zip",
+    "sha256": "a252121d5b59398fcb137c6ea448176459a44010f33f67e0072305a637119ca7",
+    "bytes": 17906210,
+    "version": "0.12.17",
+    "executable_sha256": "2019cdf564cb8f749262f5f021cedc75a99abb1c6081227ca340bbcda972611d"
+  },
+  "ffmpeg": {
+    "url": "https://github.com/GyanD/codexffmpeg/releases/download/9.0.2/ffmpeg-9.0.2-essentials_build.zip",
+    "sha256": "60f467265b1e312373dbcd92200c2618a74850f98d3d078e94296bb3fa2047ba",
+    "bytes": 114768076,
+    "version": "9.0.2",
+    "executables": {
+      "ffmpeg": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+      "ffprobe": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52"
+    }
+  },
+  "sources": {
+    "ace": {
+      "url": "https://github.com/ace-step/ACE-Step-1.5/archive/ca1e85fe9430179831e6bc6be790c332190a3866.zip",
+      "sha256": "108e45dffc7eb62af98d781c4159aa63a2b7a241186734e3e065279da7fc198d",
+      "bytes": 9148700,
+      "revision": "ca1e85fe9430179831e6bc6be790c332190a3866",
+      "folder": "vendor/ACE-Step-1.5",
+      "archive_folder": "ACE-Step-1.5-ca1e85fe9430179831e6bc6be790c332190a3866"
+    },
+    "sa3": {
+      "url": "https://github.com/stability-ai/stable-audio-3/archive/779434a908193105335fd8d833418603625b2859.zip",
+      "sha256": "bd0d7a018899f0bf62fdfe8b1338526a00720b8473ea0d5d89ab9cde6d8413c7",
+      "bytes": 51928685,
+      "revision": "779434a908193105335fd8d833418603625b2859",
+      "folder": "vendor/stable-audio-3",
+      "archive_folder": "stable-audio-3-779434a908193105335fd8d833418603625b2859"
+    }
+  },
+  "environments": {
+    "base": {
+      "executable": "vendor/ACE-Step-1.5/.venv/Scripts/python.exe",
+      "lock": "runtime-backend.lock",
+      "packages": {
+        "torch": "2.7.1+cu128",
+        "torchaudio": "2.7.1+cu128",
+        "torchvision": "0.22.1+cu128"
+      },
+      "imports": [
+        "fastapi",
+        "uvicorn",
+        "librosa",
+        "psutil",
+        "PIL",
+        "requests",
+        "httpx",
+        "soundfile",
+        "acestep.handler",
+        "acestep.inference",
+        "acestep.llm_inference"
+      ],
+      "cuda": true
+    },
+    "sa3": {
+      "executable": ".venv-sa3-py311/Scripts/python.exe",
+      "lock": "runtime-sa3.lock",
+      "packages": {
+        "stable-audio-3": "0.1.0"
+      },
+      "imports": [
+        "stable_audio_3.loading_utils",
+        "stable_audio_3.models.transformer",
+        "transformers",
+        "soundfile",
+        "psutil"
+      ],
+      "cuda": true
+    }
+  },
+  "lock_sha256": {
+    "runtime-backend.lock": "adb73d121c693512e62b4e77283a0234340fd5f7002a02892dcd7a2e826827e0",
+    "runtime-sa3.lock": "6aff40df118d19bcf4cd7806d22773f79277c0b6a9bf95522540ece1679eff07"
+  }
+}

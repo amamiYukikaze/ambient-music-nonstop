@@ -1,0 +1,9 @@
+{
+  "source": "https://github.com/amcchord/datto-d-din",
+  "license": "SIL OFL 1.1",
+  "files": {
+    "D-DIN.woff2": "41b210fad6e9eaa120e032bb945a2e4cf30dece4de3657ec0dc42732ba472740",
+    "D-DIN-Bold.woff2": "9007288706aafe9616f96be4e856fe91722056c40ea579bbfcd95993a6e82e34",
+    "D-DIN-Italic.woff2": "e4d02b82e5f2d907f12c31242adb8cb4648784cb58d6b1c52c597c97ecbd2ce4"
+  }
+}

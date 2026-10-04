@@ -1,0 +1,7 @@
+.home-brightness.glass{display:flex;align-items:center;gap:10px;width:177px;height:42px;padding:0 12px;border-radius:17px;--lift:3px;--tilt:.1deg;flex-shrink:0;cursor:default}
+.home-brightness[hidden]{display:none!important}
+.home-brightness>svg{width:18px;height:18px;flex-shrink:0;color:#ded3b8;transition:rotate 1.2s var(--ease)}
+.home-brightness:hover>svg{rotate:45deg}
+.home-brightness input[type=range]{min-width:0;flex:1;width:auto;margin:0;height:3px}
+.home-brightness output{font-size:9px;font-variant-numeric:tabular-nums;min-width:28px;text-align:right;color:#d2d2c6}
+@media(max-width:1100px){.home-brightness.glass{width:153px;gap:8px;padding:0 10px}.home-brightness>svg{width:16px;height:16px}.top-actions{gap:10px}#clock{margin-right:3px}}
