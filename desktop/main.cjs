@@ -76,15 +76,23 @@ function startBackend(p,log){
   backend.on('exit',()=>{if(!quitting){const delay=restartDelay;restartDelay=Math.min(30000,restartDelay*2);setTimeout(()=>{if(!quitting)startBackend(p,log);},delay);}});
 }
 app.whenReady().then(async () => {
+  preparingRuntime=true;
+  const started=Date.now(),{createStartup}=require('./startup.cjs');
+  let startup=createStartup(localRoot);
   if(app.isPackaged){
     fs.mkdirSync(root,{recursive:true});fs.cpSync(path.join(process.resourcesPath,'backend'),root,{recursive:true});
   }
   const specPath=app.isPackaged?path.join(process.resourcesPath,'runtime.json'):path.join(localRoot,'scripts/runtime-spec.json');
-  preparingRuntime=true;
-  try{const {ensureRuntime}=require('./runtime.cjs');await ensureRuntime({root,localRoot,specPath,
-    initialCheck:async signal=>await checkRuntime({root,specPath,managed:app.isPackaged,signal}),
-    claimIntro:()=>claimSetupIntro(app.getPath('userData'))});}
-  catch{preparingRuntime=false;app.quit();return;}
+  const health=await checkRuntime({root,specPath,managed:app.isPackaged,startup:true,signal:startup.signal,onProgress:event=>startup.update(event)});
+  if(startup.signal.aborted)return;
+  if(!health.ok){
+    startup.finish();
+    try{const {ensureRuntime}=require('./runtime.cjs');await ensureRuntime({root,localRoot,specPath,
+      initialCheck:async()=>health,claimIntro:()=>claimSetupIntro(app.getPath('userData'))});}
+    catch{preparingRuntime=false;app.quit();return;}
+    startup=createStartup(localRoot);
+  }
+  const checked=Date.now();startup.update({phase:'backend'});
   const p = await port(); base = `http://127.0.0.1:${p}`;
   const logDir = path.join(dataRoot,'.log'); fs.mkdirSync(logDir, { recursive:true });
   const logPath = path.join(logDir,'service.log');
@@ -95,14 +103,17 @@ app.whenReady().then(async () => {
   for (let i=0;i<120;i++) {
     try { await api('GET','/health'); ready=true; break; } catch { await new Promise(r=>setTimeout(r,500)); }
   }
-  if (!ready) { dialog.showErrorBox('声音服务未能启动', '请查看 '+logPath); app.quit(); return; }
+  if (!ready) { startup.finish();dialog.showErrorBox('声音服务未能启动', '请查看 '+logPath); app.quit(); return; }
+  if(startup.signal.aborted)return;
   win = new BrowserWindow({ width:1440,height:900,minWidth:980,minHeight:650,title:'栖声 · Ambient Music Nonstop',icon:path.join(__dirname,'icon.ico'),backgroundColor:'#20292e',autoHideMenuBar:true,
     webPreferences:{ preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,backgroundThrottling:false } });
   // Keep the handoff alive until the player window actually exists.
   preparingRuntime=false;
   secureWindow(win,path.join(localRoot,'ui/index.html'),{allowAudioOutput:true});
   win.on('close',e=>{if(migrationBusy&&!quitting)e.preventDefault();else if(unsavedSettings){e.preventDefault();win.webContents.send('close-requested');}});
-  win.loadFile(path.join(localRoot,'ui/index.html'));
+  await win.loadFile(path.join(localRoot,'ui/index.html'));
+  startup.finish();
+  try{fs.writeFileSync(path.join(logDir,'startup-last.json'),JSON.stringify({version:app.getVersion(),health_mode:health.mode||'repair',health_ms:checked-started,window_ms:Date.now()-started,cache_warning:health.cache_warning||null},null,2));}catch{}
   stopVisibility=watchVisibility(win,python,root);
   powerSaveBlocker.start('prevent-app-suspension');
 });

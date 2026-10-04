@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "files": [
     {
       "path": ".gitattributes",
@@ -9,8 +9,8 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 284,
-      "sha256": "748aee8263e1cec22577cc8ddd283141b50c44cb2ed8f2c26dcbe489066d5f43"
+      "bytes": 334,
+      "sha256": "cea6932a14f7b5d5690e0ab3c4f9db9abff8fbb034636440e3d4f2b1c3587401"
     },
     {
       "path": "AMBIENCE_ATTRIBUTION.md",
@@ -24,8 +24,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 10015,
-      "sha256": "aa5a4222c8218e989865edbb6486cf51ff0e5a43b437b74266c4fdcdb684fa61"
+      "bytes": 10408,
+      "sha256": "bb9bbc3f2e38b0926b70585a09bdec91ce61a6d0f7321536da86b23f72ff1420"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -129,8 +129,8 @@
     },
     {
       "path": "desktop/main.cjs",
-      "bytes": 7922,
-      "sha256": "b1be82008a99a23b72e41b38dbb1cc4742e6cea373a098c6ddf4ae7683ebd1b5"
+      "bytes": 8628,
+      "sha256": "5e47b07d7f65153651e0d2f03ae675d8cba7ff570f370e4836a8f3b4b70aa546"
     },
     {
       "path": "desktop/preload.cjs",
@@ -144,8 +144,8 @@
     },
     {
       "path": "desktop/runtime-health.cjs",
-      "bytes": 1332,
-      "sha256": "6671b41db34179250c5b4ad62d052a271d61b8161f2c011818a6dc0ba82eea89"
+      "bytes": 1792,
+      "sha256": "fc3ec092534b58e16d44887557fa8ba65c419e141008d29de22e0ae39553907f"
     },
     {
       "path": "desktop/runtime-location.cjs",
@@ -164,13 +164,23 @@
     },
     {
       "path": "desktop/runtime.cjs",
-      "bytes": 4390,
-      "sha256": "fc7848a80dab5008f19d6ae510abefa4454411b6862c06a1173d3edd84a2bc4a"
+      "bytes": 4403,
+      "sha256": "1bef9d2e25c71c0b2e8878844ece881ddeefc1ca61372c71e811b7645c67229d"
     },
     {
       "path": "desktop/security.cjs",
       "bytes": 1588,
       "sha256": "34954e9a501eb74927c00fc89a21134ba97d428195463a767e8c2a3311744e82"
+    },
+    {
+      "path": "desktop/startup-preload.cjs",
+      "bytes": 376,
+      "sha256": "ea85881455d414e11cc65b8ae400ba54190cf3e42f36346336d93551c7ae7456"
+    },
+    {
+      "path": "desktop/startup.cjs",
+      "bytes": 1167,
+      "sha256": "9e575e64a57eb767d69048bcdba2503fc8a70e63e2b9560860e9aaf5349f2372"
     },
     {
       "path": "desktop/visibility.cjs",
@@ -179,23 +189,28 @@
     },
     {
       "path": "docs/CLEAN_WINDOWS_ACCEPTANCE.md",
-      "bytes": 5860,
-      "sha256": "16fcaafe2f2ac678a8fbec6e77271f967fa7d1b232266a758dee26ee4f96dedb"
+      "bytes": 6612,
+      "sha256": "bca7a4b48f9371e5d92157ab9d65776ef39f0489309a9a5c83d990150bea7408"
     },
     {
       "path": "docs/PUBLIC_RELEASE_CHECKLIST.md",
       "bytes": 3676,
-      "sha256": "ada65bf9d57e71b8233aa3fa7e66bc13d2e71d08496e1eadac56e3c6d64813a8"
+      "sha256": "c8cc3f43d062c84b168facfcaabfa75779a7d45b2bcef609d5fb97a1288fb9b1"
     },
     {
       "path": "docs/RECOVERY_AND_UPGRADE.md",
-      "bytes": 6766,
-      "sha256": "3472abd53aae94abcb70c22c7b1c7c557006c6276a1476b71f25135dfe68c93f"
+      "bytes": 7298,
+      "sha256": "90917668ea0cc28fc3cfac7e5ca596557aedc74ebb3691d96e2854fb251c20b1"
     },
     {
       "path": "docs/RELEASE_NOTES_1.0.1.md",
       "bytes": 3121,
       "sha256": "75ebd870bd93de9d56bb11fd503f488fff419991c33a47c3466ac5e449a22d28"
+    },
+    {
+      "path": "docs/RELEASE_NOTES_1.0.2.md",
+      "bytes": 2243,
+      "sha256": "b1e19b6b038b68a9ff56e8c050d5106c5657923bb0965ca025af76b7427fd56b"
     },
     {
       "path": "docs/RELEASE_NOTES_1.0.md",
@@ -250,12 +265,12 @@
     {
       "path": "package-lock.json",
       "bytes": 25776,
-      "sha256": "affd390b9e3d46095b2f8c13ed1daad537f8d9c7a3dad7ec22971cf84e7a2119"
+      "sha256": "49463924320921d10d9a73b1234ef688538cd29d5d7ab538be96d10671c29722"
     },
     {
       "path": "package.json",
       "bytes": 715,
-      "sha256": "39a539d45cfde8a8ea7fd76ee52303369653e75c32cb34f4f61c0c7c4d3534db"
+      "sha256": "86fb2574cee4d3b7624f8709e388ee926db7f7d682fdebc2389dda37343447ce"
     },
     {
       "path": "pytest.ini",
@@ -294,13 +309,13 @@
     },
     {
       "path": "scripts/package.cjs",
-      "bytes": 2790,
-      "sha256": "48671bcfc4d1318d3946489e574c73bf56db8d99f3337643a1d797bd96eac6c9"
+      "bytes": 2834,
+      "sha256": "0b1fe8c886c4c08019e5738a156657de89c6521c951e5c961e0ae49e7c4ed5bb"
     },
     {
       "path": "scripts/public-files.json",
-      "bytes": 5951,
-      "sha256": "f1beadf4616010e612e3604f9d5805a99abcafb6a1b02d350e8ba6a735730a0f"
+      "bytes": 6214,
+      "sha256": "2fbd271f2ed26e6787ed4d64547fa335c657ba46754127010f74b21f18942f59"
     },
     {
       "path": "scripts/qc_worker.py",
@@ -319,8 +334,8 @@
     },
     {
       "path": "scripts/release-source.cjs",
-      "bytes": 7567,
-      "sha256": "9a846b919314d6a4996bc62b548708660b85bb9145f37edf8f9cab56a5717120"
+      "bytes": 7621,
+      "sha256": "74e77463062c9dfa8591b5eaed7692119371d8943dbe39cad24e63ac006098d7"
     },
     {
       "path": "scripts/render-brand.cjs",
@@ -343,9 +358,14 @@
       "sha256": "d831ccdc7b0a30a58c627c6e8ee885ffc96d8b0f5d61c697780525592b6fc3dc"
     },
     {
+      "path": "scripts/runtime_cache.py",
+      "bytes": 5619,
+      "sha256": "2602a6ab54260352b8864947d2c614e5bc8be013acbbda437ba58b9f6ca248dc"
+    },
+    {
       "path": "scripts/runtime_health.py",
-      "bytes": 10037,
-      "sha256": "b703bab80f1de2f6480134ee4f46f596af09447f9b32db3476e75185b46ee37b"
+      "bytes": 11364,
+      "sha256": "a55640b4799ae61fbee7fc1e9d86ed1a0b286e3abf45a376652d656500bacb17"
     },
     {
       "path": "scripts/sa3_audition.py",
@@ -368,14 +388,19 @@
       "sha256": "a0a1f6a045181811c294cb6b6ec9a47ce38a272cfc97d0a9fdab3d29d66419b0"
     },
     {
+      "path": "scripts/startup-check.cjs",
+      "bytes": 3956,
+      "sha256": "9cd2be4f8a26c069ed518c780baf7e8e8ef9e475a0cf6c6580ccd26f78b32c5c"
+    },
+    {
       "path": "scripts/test-mix.mjs",
       "bytes": 908,
       "sha256": "677f8364fbdd004a434a3820e34817a5c814d6b7911fccbb9899e35ab639d667"
     },
     {
       "path": "scripts/verify-package.cjs",
-      "bytes": 4952,
-      "sha256": "b6a38bc561448d19bf9540985985c877a518633c3e82b7e7aa0810e62ed5ee0b"
+      "bytes": 5001,
+      "sha256": "82f8dfb04780e0f297e3af63f2d3d5f4fb0243f81daf9624dc07654bc2104ba3"
     },
     {
       "path": "scripts/verify-public-index.cjs",
@@ -514,8 +539,8 @@
     },
     {
       "path": "tests/electron-security.test.cjs",
-      "bytes": 3732,
-      "sha256": "13a8865ade3797c0ded0bce8b9825467e2276b20ff674a9c5f63b07fb22e0e40"
+      "bytes": 3824,
+      "sha256": "21fea7cf60dc828d77b0d77e2f9ac9a547f18b30d566b30d26eb62a624abee2e"
     },
     {
       "path": "tests/release-source.test.cjs",
@@ -576,6 +601,11 @@
       "path": "tests/test_qc.py",
       "bytes": 5216,
       "sha256": "6de6ce9f1bc06578abded9c4f7b126fd44478f60f0321d1f077a87c5378d124b"
+    },
+    {
+      "path": "tests/test_runtime_cache.py",
+      "bytes": 6394,
+      "sha256": "d2eb5f19ac3679f4b9d542a78bfc936b5722ee67448a6ae30dfe98142baa6308"
     },
     {
       "path": "tests/test_runtime_health.py",
@@ -986,6 +1016,21 @@
       "path": "ui/startup-recovery.js",
       "bytes": 3047,
       "sha256": "8c1bcc8d00b58fc0744330f097ac3f641dfcfd6434e11456e313ed3507be332a"
+    },
+    {
+      "path": "ui/startup.css",
+      "bytes": 796,
+      "sha256": "2739989c504de381488d7b91ab9133803479b33032d86e3de9c810c1b81c3c09"
+    },
+    {
+      "path": "ui/startup.html",
+      "bytes": 777,
+      "sha256": "cab5adf45145f113f31acb63c5121e0fc84933f728fdec700f2f549cb4d19472"
+    },
+    {
+      "path": "ui/startup.js",
+      "bytes": 1692,
+      "sha256": "61ea5cf90ea436b4cfeda36b3a5241ad9341aa78e98e7645ff80ce59efd11448"
     },
     {
       "path": "ui/style-bubbles.js",

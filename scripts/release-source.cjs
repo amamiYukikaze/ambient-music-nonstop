@@ -66,7 +66,7 @@ function exportSource(root,out){
  const pkg=readJSON(path.join(out,'package.json'));
  pkg.scripts={start:'electron .',package:'node scripts/package.cjs',icons:'electron scripts/render-brand.cjs','test:mix':'node scripts/test-mix.mjs','test:release':'node --test tests/*.test.cjs','export:github':'node scripts/export-github.cjs','verify:source':'node scripts/verify-source.cjs'};
  writeJSON(path.join(out,'package.json'),pkg);
- fs.writeFileSync(path.join(out,'.gitignore'),['node_modules/','vendor/','.venv*/','dist/','release/','release-artifacts*/','artifacts/','__pycache__/','.pytest_cache/','.cache/','.downloads/','tools/','*.pyc','*.log','*.sqlite3*','.env*','config*.json','runtime-location.json','runtime.json','runtime.json.part','.runtime-backups/','setup-download.json','.runtime-installing',''].join('\n'));
+ fs.writeFileSync(path.join(out,'.gitignore'),['node_modules/','vendor/','.venv*/','dist/','release/','release-artifacts*/','artifacts/','__pycache__/','.pytest_cache/','.cache/','.downloads/','tools/','*.pyc','*.log','*.sqlite3*','.env*','config*.json','runtime-location.json','runtime.json','runtime.json.part','.runtime-health-cache.json','.runtime-health-*.part','.runtime-backups/','setup-download.json','.runtime-installing',''].join('\n'));
  const entries=selected.map(file=>{const bytes=fs.readFileSync(path.join(out,file));if(isText(file))scanText(file,bytes.toString('utf8'));return {path:file,bytes:bytes.length,sha256:sha(bytes)};});
  writeJSON(path.join(out,MANIFEST),{schema_version:1,version:pkg.version,files:entries});
  fs.unlinkSync(path.join(out,'.incomplete'));

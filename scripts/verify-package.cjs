@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const {verifySource,filesIn,scanText}=require('./release-source.cjs');
 const hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
-const backendScripts=['generate_worker.py','generate_sa3_worker.py','qc_worker.py','worker_watchdog.py','sa3_audition.py','source_revision.py','window_visibility.py','install-runtime.ps1','runtime_health.py','runtime-spec.json','runtime-backend.lock','runtime-sa3.lock'];
+const backendScripts=['generate_worker.py','generate_sa3_worker.py','qc_worker.py','worker_watchdog.py','sa3_audition.py','source_revision.py','window_visibility.py','install-runtime.ps1','runtime_health.py','runtime_cache.py','runtime-spec.json','runtime-backend.lock','runtime-sa3.lock'];
 async function verifyPackage(directory,source){
  directory=path.resolve(directory);source=path.resolve(source);
  verifySource(source,{allowBuildArtifacts:true});
@@ -34,7 +34,7 @@ async function verifyPackage(directory,source){
  for(const name of actualBackend)if(hash(fs.readFileSync(path.join(backend,name)))!==hash(fs.readFileSync(path.join(source,name))))throw Error('Backend source mismatch: '+name);
  if(hash(fs.readFileSync(path.join(directory,'resources/runtime.json')))!==hash(fs.readFileSync(path.join(source,'scripts/runtime-spec.json'))))throw Error('Runtime specification mismatch');
  for(const name of ['Ambient Music Nonstop.exe','LICENSE','LICENSE.electron.txt','LICENSES.chromium.html','AMBIENCE_ATTRIBUTION.md','THIRD_PARTY_NOTICES.md','resources/app.asar'])if(!fs.statSync(path.join(directory,name)).isFile())throw Error('Missing release file: '+name);
- for(const name of ['LICENSE','AMBIENCE_ATTRIBUTION.md','THIRD_PARTY_NOTICES.md','docs/RECOVERY_AND_UPGRADE.md','docs/CLEAN_WINDOWS_ACCEPTANCE.md','docs/RELEASE_NOTES_1.0.md','docs/RELEASE_NOTES_1.0.1.md','builtin-ambience/manifest.json','builtin-ambience/provenance.json'])if(hash(fs.readFileSync(path.join(directory,name)))!==hash(fs.readFileSync(path.join(source,name))))throw Error('Release notice mismatch: '+name);
+ for(const name of ['LICENSE','AMBIENCE_ATTRIBUTION.md','THIRD_PARTY_NOTICES.md','docs/RECOVERY_AND_UPGRADE.md','docs/CLEAN_WINDOWS_ACCEPTANCE.md','docs/RELEASE_NOTES_1.0.md','docs/RELEASE_NOTES_1.0.1.md','docs/RELEASE_NOTES_1.0.2.md','builtin-ambience/manifest.json','builtin-ambience/provenance.json'])if(hash(fs.readFileSync(path.join(directory,name)))!==hash(fs.readFileSync(path.join(source,name))))throw Error('Release notice mismatch: '+name);
  for(const name of filesIn(directory))if(/(^|\/)(\.git|\.pytest_cache|__pycache__|\.venv|\.env|artifacts|reference-music|MusicLib|staging|models)(\/|$)|\.(sqlite3|pyc)$/.test(name))throw Error('Private/development file in package: '+name);
  return {ok:true,version:sourcePackage.version,asar_files:asarFiles.length,backend_files:actualBackend.length,distribution_files:filesIn(directory).length,source_manifest_sha256:hash(fs.readFileSync(path.join(source,'public-source-manifest.json'))),asar_sha256:hash(fs.readFileSync(archive))};
 }

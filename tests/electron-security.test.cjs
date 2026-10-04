@@ -9,6 +9,7 @@ for(const [file,namespace,method,channel,payload,expected] of [
  ['preload.cjs','ambient','onCloseRequest','close-requested',[],[]],
  ['preload.cjs','ambient','onVisibility','visibility',[true],[true]],
  ['runtime-preload.cjs','runtime','progress','runtime-progress',['progress'],['progress']],
+ ['startup-preload.cjs','startup','progress','startup-progress',['progress'],['progress']],
 ])test(`${file} ${method} does not expose IPC event or emitter`,()=>{
  const ipcRenderer=new EventEmitter();let api;
  vm.runInNewContext(fs.readFileSync(path.join(root,'desktop',file),'utf8'),{require:()=>({ipcRenderer,contextBridge:{exposeInMainWorld(name,value){assert.equal(name,namespace);api=value;}}})});

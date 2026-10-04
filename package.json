@@ -1,7 +1,7 @@
 {
   "name": "ambient-music-nonstop",
   "productName": "Ambient Music Nonstop",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A quiet, evolving sound environment for home",
   "private": true,
   "main": "desktop/main.cjs",

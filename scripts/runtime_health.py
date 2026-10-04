@@ -99,7 +99,7 @@ def environment_spec(spec, name, scripts):
     return expected
 
 
-def check_runtime(root, spec_path, managed=True, complete_install=False):
+def check_runtime(root, spec_path, managed=True, complete_install=False, progress=lambda event: None):
     errors, checks, manifests = [], {}, {}
     spec = json.loads(spec_path.read_text(encoding='utf8'))
     spec_hash = sha256(spec_path)
@@ -120,7 +120,12 @@ def check_runtime(root, spec_path, managed=True, complete_install=False):
         receipt = {}
     if errors and not complete_install:
         return {'ok':False,'errors':errors,'checks':checks}
+    completed = 0
+    stages = len(spec['sources']) + len(spec['environments']) + 3
+    def report(stage):
+        progress({'phase': 'deep', 'stage': stage, 'completed': completed, 'stages': stages})
     for name, source in spec['sources'].items():
+        report('source-' + name)
         try:
             directory = root / source['folder']
             if managed:
@@ -134,9 +139,11 @@ def check_runtime(root, spec_path, managed=True, complete_install=False):
                     raise ValueError('Source revision mismatch')
         except Exception as exc:
             errors.append(f'{name}: {exc}')
+        completed += 1
     if errors and not complete_install:
         return {'ok':False,'errors':errors,'checks':checks}
     for name, environment in spec['environments'].items():
+        report('environment-' + name)
         try:
             environment_spec(spec, name, scripts)
             python = root / environment['executable']
@@ -146,7 +153,9 @@ def check_runtime(root, spec_path, managed=True, complete_install=False):
             errors.extend(f'{name}: {message}' for message in result['errors'])
         except Exception as exc:
             errors.append(f'{name} Python runtime: {exc}')
+        completed += 1
     for name in ('ffmpeg', 'ffprobe'):
+        report(name)
         try:
             binary = root / f'tools/ffmpeg/bin/{name}.exe'
             if not managed and not binary.is_file():
@@ -160,7 +169,9 @@ def check_runtime(root, spec_path, managed=True, complete_install=False):
             checks[name] = line
         except Exception as exc:
             errors.append(f'{name}: {exc}')
+        completed += 1
     if managed:
+        report('dependencies')
         try:
             uv = root / 'tools/uv/uv.exe'
             if sha256(uv) != spec['uv']['executable_sha256']:
@@ -171,6 +182,8 @@ def check_runtime(root, spec_path, managed=True, complete_install=False):
                 command([uv, 'pip', 'check', '--python', root / environment['executable']], root)
         except Exception as exc:
             errors.append(f'Dependency integrity: {exc}')
+    completed += 1
+    report('complete')
     result = {'ok': not errors, 'errors': errors, 'checks': checks}
     if complete_install and result['ok']:
         payload = {'schema_version': 1, 'runtime_version': spec['runtime_version'],
@@ -180,6 +193,12 @@ def check_runtime(root, spec_path, managed=True, complete_install=False):
             json.dump(payload, out, indent=2)
             out.flush(); os.fsync(out.fileno())
         temporary.replace(root / 'runtime.json')
+        try:
+            from runtime_cache import snapshot, save
+            save(root, snapshot(root, spec_path, progress))
+        except Exception as exc:
+            # A successful installation is still usable when the optional cache cannot be written.
+            result['cache_warning'] = str(exc)
     return result
 
 
@@ -190,14 +209,23 @@ def main():
     parser.add_argument('--probe', choices=['base', 'sa3'])
     parser.add_argument('--development', action='store_true')
     parser.add_argument('--complete-install', action='store_true')
+    parser.add_argument('--startup', action='store_true')
+    parser.add_argument('--progress', action='store_true')
     args = parser.parse_args()
+    def progress(event):
+        if args.progress:
+            print('AMBIENT_HEALTH ' + json.dumps(event), flush=True)
     try:
         if args.probe:
             spec = json.loads(args.spec.read_text(encoding='utf8'))
             result = probe_environment(environment_spec(spec, args.probe, args.root / 'scripts'))
+        elif args.startup and not args.development and not args.complete_install:
+            from runtime_cache import startup_check
+            root, spec = args.root.resolve(), args.spec.resolve()
+            result = startup_check(root, spec, lambda: check_runtime(root, spec, progress=progress), progress)
         else:
             result = check_runtime(args.root.resolve(), args.spec.resolve(),
-                                   not args.development, args.complete_install)
+                                   not args.development, args.complete_install, progress)
     except Exception as exc:
         result = {'ok': False, 'errors': [str(exc)]}
     print(json.dumps(result))

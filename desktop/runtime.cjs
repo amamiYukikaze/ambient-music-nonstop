@@ -37,7 +37,7 @@ exports.ensureRuntime=({root,localRoot,specPath,initialCheck,claimIntro=()=>fals
    child=null;log.end();if(win.isDestroyed())return;
    if(spawnError||code!==0){fail(spawnError?.message||`安装未完成（退出码 ${code}），展开日志查看原因，然后重试。`);return;}
    checking=true;send({type:'progress',phase:'checking',stage:'health',completed:8,stages:9});
-   try{const health=await checkRuntime({root,specPath,signal:checkAbort.signal});if(health.ok)complete();else fail(health.errors.join('\n'));}
+   try{const health=await checkRuntime({root,specPath,signal:checkAbort.signal,startup:true});if(health.ok)complete();else fail(health.errors.join('\n'));}
    catch(error){fail(error.message);}
   });return true;
  });

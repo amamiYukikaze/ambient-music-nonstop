@@ -18,6 +18,8 @@ config*.json
 runtime-location.json
 runtime.json
 runtime.json.part
+.runtime-health-cache.json
+.runtime-health-*.part
 .runtime-backups/
 setup-download.json
 .runtime-installing
