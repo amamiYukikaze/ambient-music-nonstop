@@ -77,10 +77,17 @@ def _manifest(variant,token):
     if not items:raise ValueError('模型清单为空')
     return items
 
-def _verified(path,item):
+def _verified(path,item,progress=None):
     if not path.is_file() or path.stat().st_size!=item['size']:return False
     if not item['sha256']:return True
-    with path.open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()==item['sha256']
+    digest=hashlib.sha256();count=0;last=0
+    with path.open('rb') as f:
+        while block:=f.read(8*1024*1024):
+            digest.update(block);count+=len(block)
+            now=time.monotonic()
+            if progress and now-last>=.2:progress(count);last=now
+    if progress:progress(count)
+    return digest.hexdigest()==item['sha256']
 
 def _download(items,directory,token):
     import requests
@@ -90,16 +97,18 @@ def _download(items,directory,token):
     todo=[]
     for item in items:
         target=directory/item['relative']
-        if _verified(target,item):done+=item['size']
+        _set(file=item['relative'])
+        if _verified(target,item,lambda count:_set(downloaded=done+count,progress=100*(done+count)/max(1,total))):done+=item['size']
         else:todo.append(item)
+        _set(downloaded=done,progress=100*done/max(1,total))
     remaining=sum(i['size'] for i in todo)
     if shutil.disk_usage(directory).free<remaining+20_000_000_000:raise ValueError('模型目录空间不足：下载之外还需保留 20 GB')
-    network=0
+    network=0;started=time.monotonic()
     for item in todo:
         target=directory/item['relative'];target.parent.mkdir(parents=True,exist_ok=True);part=target.with_name(target.name+'.part')
         offset=part.stat().st_size if part.exists() else 0
         if offset>item['size']:part.unlink();offset=0
-        _set(phase='downloading',file=item['relative'])
+        _set(phase='downloading',file=item['relative'],downloaded=done+offset,progress=100*(done+offset)/max(1,total),eta_seconds=None)
         if offset<item['size']:
             headers={'Authorization':f'Bearer {token}'} if token else {}
             if offset:headers['Range']=f'bytes={offset}-'
@@ -115,7 +124,7 @@ def _download(items,directory,token):
                         elapsed=max(.01,time.monotonic()-started);rate=network/elapsed
                         _set(downloaded=done+offset,progress=100*(done+offset)/max(1,total),eta_seconds=int((total-done-offset)/rate) if rate else None)
                     f.flush();os.fsync(f.fileno())
-        _set(phase='verifying')
+        _set(phase='verifying',eta_seconds=None)
         if not _verified(part,item):
             part.unlink(missing_ok=True);raise ValueError('模型文件校验失败，请重试')
         part.replace(target);done+=item['size']
@@ -147,7 +156,7 @@ def start_download(variants,directory,token=None,local_only=False):
                 _set(total=total)
                 for item in items:
                     _set(phase='verifying',file=item['relative'])
-                    if not _verified(target/item['relative'],item):raise ValueError('所选目录缺少或损坏模型文件；可切换为下载补全')
+                    if not _verified(target/item['relative'],item,lambda count:_set(downloaded=done+count,progress=100*(done+count)/max(1,total))):raise ValueError('所选目录缺少或损坏模型文件；可切换为下载补全')
                     done+=item['size'];_set(downloaded=done,progress=100*done/max(1,total))
             else:_download(items,target,credential)
             cfg=read_config();paths=cfg['paths'];paths['models']=str(target);setup=cfg['setup'];setup['models']=chosen;setup['models_verified']=True

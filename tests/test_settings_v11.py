@@ -83,6 +83,38 @@ def test_download_resume_and_checksum(system,monkeypatch):
     p._download([{'repo':'test/repo','revision':'abc','remote':'weights.bin','relative':'weights.bin','size':len(payload),'sha256':sha}],root,None)
     assert (root/'weights.bin').read_bytes()==payload and not part.exists()
 
+
+def test_existing_model_verification_reports_actual_bytes(system):
+    p,root=system[2:]
+    payload=b'byte progress' * 800000
+    target=root/'existing.bin';target.write_bytes(payload);counts=[]
+    item={'size':len(payload),'sha256':hashlib.sha256(payload).hexdigest()}
+    assert p._verified(target,item,counts.append)
+    assert counts[0] == 8*1024*1024
+    assert counts[-1] == len(payload)
+    assert all(a<=b for a,b in zip(counts,counts[1:]))
+    target.write_bytes(b'wrong')
+    assert not p._verified(target,item,lambda _:pytest.fail('wrong-size file is not read'))
+
+
+def test_sa3_permission_failure_precedes_all_weight_downloads_and_can_retry(system,monkeypatch):
+    db,prefs,p,root=system
+    cfg=prefs.read_config();cfg['setup']['hardware']={'ace':True,'sa3':True};prefs.write_config(cfg)
+    original=cfg['paths']['models'];target=root/'authorized-models';downloads=[]
+    def manifest(variant,token):
+        if variant=='stable-audio-3-medium':raise PermissionError('HF access denied not-a-real-token')
+        return [{'relative':variant}]
+    monkeypatch.setattr(p,'_manifest',manifest)
+    monkeypatch.setattr(p,'_download',lambda *args:downloads.append(args))
+    p.start_download(['stable-audio-3-medium'],str(target),'not-a-real-token');p._thread.join(5)
+    assert p.snapshot()['phase']=='failed' and not downloads
+    assert '授权' in p.snapshot()['error'] and 'not-a-real-token' not in p.snapshot()['error']
+    assert prefs.read_config()['paths']['models']==original
+    monkeypatch.setattr(p,'_manifest',lambda variant,token:[{'relative':variant}])
+    p.start_download(['stable-audio-3-medium'],str(target),'not-a-real-token');p._thread.join(5)
+    assert p.snapshot()['phase']=='done' and len(downloads)==1
+    assert 'not-a-real-token' not in json.dumps(prefs.read_config())
+
 def test_custom_image_is_separate_from_original(system):
     from PIL import Image
     from server.assets import import_asset,media_path

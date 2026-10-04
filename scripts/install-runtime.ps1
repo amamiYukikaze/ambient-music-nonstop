@@ -9,6 +9,14 @@ function Initialize-InstallerHost {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 }
 Initialize-InstallerHost
+[Console]::OutputEncoding = New-Object Text.UTF8Encoding($false)
+$OutputEncoding = [Console]::OutputEncoding
+$script:stage='uv'
+$script:completed=0
+function Report-Progress([string]$Phase,[long]$Downloaded=0,[long]$Total=0,[string]$File='') {
+    $event=@{stage=$script:stage;phase=$Phase;completed=$script:completed;stages=9;downloaded=$Downloaded;total=$Total;file=$File}
+    [Console]::WriteLine('AMBIENT_PROGRESS '+(ConvertTo-Json -InputObject $event -Compress))
+}
 $runtimePath = [IO.Path]::GetFullPath($RuntimeRoot).TrimEnd('\','/')
 function Assert-Owned([string]$Candidate) {
     $full=[IO.Path]::GetFullPath($Candidate)
@@ -33,9 +41,36 @@ function Checked-Download([string]$Url,[string]$Destination,[string]$ChecksumUrl
         $expected=($checksum.Trim() -split '\s+')[0].ToLower()
     }
     if($expected -notmatch '^[a-f0-9]{64}$') { throw 'Invalid download checksum' }
-    if((Test-Path -LiteralPath $Destination) -and (Get-FileHash -LiteralPath $Destination -Algorithm SHA256).Hash.ToLower() -eq $expected) { return }
+    $name=Split-Path $Destination -Leaf
+    Report-Progress 'verifying' 0 0 $name
+    if((Test-Path -LiteralPath $Destination) -and (Get-FileHash -LiteralPath $Destination -Algorithm SHA256).Hash.ToLower() -eq $expected) {
+        $length=(Get-Item -LiteralPath $Destination).Length
+        Report-Progress 'cached' $length $length $name
+        return
+    }
     $partial=$Destination+'.part'
-    Invoke-WebRequest -UseBasicParsing -Uri $Url -OutFile $partial
+    # Streaming reads expose actual bytes without buffering large archives in RAM.
+    # WebRequest uses Windows proxy configuration and normal TLS verification.
+    $request=[Net.HttpWebRequest]::Create($Url)
+    $request.Timeout=30000;$request.ReadWriteTimeout=90000
+    $response=$null;$inputStream=$null;$outputStream=$null
+    try {
+        $response=$request.GetResponse();$total=[Math]::Max(0,$response.ContentLength)
+        $inputStream=$response.GetResponseStream();$outputStream=[IO.File]::Create($partial)
+        $buffer=New-Object byte[] 131072;$received=0L;$last=[DateTime]::MinValue
+        Report-Progress 'downloading' 0 $total $name
+        while(($count=$inputStream.Read($buffer,0,$buffer.Length)) -gt 0) {
+            $outputStream.Write($buffer,0,$count);$received+=$count
+            if(([DateTime]::UtcNow-$last).TotalMilliseconds -ge 200) {
+                Report-Progress 'downloading' $received $total $name;$last=[DateTime]::UtcNow
+            }
+        }
+        $outputStream.Flush()
+        if($total -gt 0 -and $received -ne $total) { throw 'Incomplete artifact download' }
+        Report-Progress 'verifying' $received $total $name
+    } finally {
+        if($outputStream) {$outputStream.Dispose()};if($inputStream) {$inputStream.Dispose()};if($response) {$response.Dispose()}
+    }
     if((Get-FileHash -LiteralPath $partial -Algorithm SHA256).Hash.ToLower() -ne $expected) { throw 'Download checksum mismatch' }
     Move-Item -LiteralPath $partial -Destination $Destination -Force
 }
@@ -57,9 +92,12 @@ function Preserve-Previous([string]$Destination,[string]$Name) {
     }
 }
 function Install-Archive($Artifact,[string]$Name,[string]$Folder,[string]$ArchiveFolder) {
+    $script:stage=$Name
+    Report-Progress 'preparing'
     Write-Host "Installing verified $Name..."
     $zip=Assert-Owned (Join-Path $downloads ($Name+'.zip'))
     Checked-Download $Artifact.url $zip '' $Artifact.sha256
+    Report-Progress 'extracting'
     $unpack=Assert-Owned (Join-Path $downloads ($Name+'-'+[guid]::NewGuid().ToString('N')))
     Expand-Archive -LiteralPath $zip -DestinationPath $unpack
     $source=if($ArchiveFolder) { Join-Path $unpack $ArchiveFolder } else { $unpack }
@@ -67,6 +105,8 @@ function Install-Archive($Artifact,[string]$Name,[string]$Folder,[string]$Archiv
     Preserve-Previous $destination $Name
     New-Item -ItemType Directory -Path (Split-Path $destination -Parent) -Force | Out-Null
     Move-Owned $source $destination
+    $script:completed++
+    Report-Progress 'stage-done'
     return $destination
 }
 # Use our verified tools even when different versions happen to be on PATH.
@@ -77,6 +117,7 @@ $env:UV_PYTHON_INSTALL_DIR=Join-Path $runtimePath 'tools/python'
 $env:UV_PYTHON_PREFERENCE='only-managed'
 $env:UV_PYTHON_DOWNLOADS='automatic'
 $env:UV_NO_PROGRESS='1'
+$env:UV_LINK_MODE='copy'
 $env:PYTHONUTF8='1'
 Remove-Item Env:PYTHONHOME -ErrorAction SilentlyContinue
 Remove-Item Env:PYTHONPATH -ErrorAction SilentlyContinue
@@ -90,11 +131,14 @@ foreach($name in @('ace','sa3')) {
     Set-Content -LiteralPath (Join-Path $folder '.source-revision') -Value $artifact.revision -Encoding ascii
 }
 Write-Output 'Installing pinned Python and ACE/backend dependencies (large downloads)...'
+$script:stage='ace-dependencies';Report-Progress 'installing'
 & $uvExe sync --project vendor/ACE-Step-1.5 --python $spec.python --frozen --no-dev
 if($LASTEXITCODE) { throw 'ACE environment installation failed' }
+$script:completed++;$script:stage='backend-dependencies';Report-Progress 'installing'
 $basePython=Join-Path $runtimePath $spec.environments.base.executable
 & $uvExe pip install --python $basePython --require-hashes -r scripts/runtime-backend.lock
 if($LASTEXITCODE) { throw 'Backend dependencies failed' }
+$script:completed++;$script:stage='sa3-dependencies';Report-Progress 'installing'
 Write-Output 'Installing isolated SA3 runtime...'
 Preserve-Previous (Join-Path $runtimePath '.venv-sa3-py311') 'sa3-environment'
 & $uvExe venv .venv-sa3-py311 --python $spec.python
@@ -102,11 +146,15 @@ if($LASTEXITCODE) { throw 'SA3 Python installation failed' }
 $saPython=Join-Path $runtimePath $spec.environments.sa3.executable
 & $uvExe pip install --python $saPython --require-hashes --index-strategy unsafe-best-match -r scripts/runtime-sa3.lock
 if($LASTEXITCODE) { throw 'SA3 dependencies failed' }
+$script:completed++;$script:stage='sa3-source';Report-Progress 'installing'
 & $uvExe pip install --python $saPython --no-deps -e vendor/stable-audio-3
 if($LASTEXITCODE) { throw 'SA3 source installation failed' }
+$script:completed++
 $null=Install-Archive $spec.ffmpeg 'ffmpeg' 'tools/ffmpeg' ('ffmpeg-'+$spec.ffmpeg.version+'-essentials_build')
 Write-Output 'Checking source hashes, dependency integrity, imports, FFmpeg and CUDA device 0...'
+$script:stage='health';Report-Progress 'checking'
 & $basePython scripts/runtime_health.py --root $runtimePath --spec $specPath --complete-install
 if($LASTEXITCODE) { throw 'Runtime health validation failed; repair is required' }
 Remove-Item -LiteralPath $installMarker
+$script:completed=9;Report-Progress 'done'
 Write-Output 'Runtime ready. Model weights will be configured in the first-run wizard.'

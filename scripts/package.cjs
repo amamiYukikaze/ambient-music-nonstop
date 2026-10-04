@@ -22,7 +22,7 @@ const {exportSource}=require('./release-source.cjs');
   fs.mkdirSync(path.join(dir,'builtin-ambience'),{recursive:true});
   for(const file of ['manifest.json','provenance.json'])fs.copyFileSync(path.join(source,'builtin-ambience',file),path.join(dir,'builtin-ambience',file));
   fs.mkdirSync(path.join(dir,'docs'),{recursive:true});
-  for(const file of ['RECOVERY_AND_UPGRADE.md','CLEAN_WINDOWS_ACCEPTANCE.md','RELEASE_NOTES_1.0.md'])fs.copyFileSync(path.join(source,'docs',file),path.join(dir,'docs',file));
+  for(const file of ['RECOVERY_AND_UPGRADE.md','CLEAN_WINDOWS_ACCEPTANCE.md','RELEASE_NOTES_1.0.md','RELEASE_NOTES_1.0.1.md'])fs.copyFileSync(path.join(source,'docs',file),path.join(dir,'docs',file));
  }
  console.log(dirs.join('\n'));
  fs.writeFileSync(path.join(out,'build-source.json'),JSON.stringify({source,directories:dirs},null,2)+'\n');

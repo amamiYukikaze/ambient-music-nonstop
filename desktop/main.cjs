@@ -8,6 +8,7 @@ const {watchVisibility}=require('./visibility.cjs');
 const {brightness}=require('./brightness.cjs');
 const {trustedHandlers,secureWindow}=require('./security.cjs');
 const {checkRuntime}=require('./runtime-health.cjs');
+const {runtimeRoot,claimSetupIntro}=require('./runtime-location.cjs');
 app.setAppUserModelId('work.amamiykkz.ambientmusicnonstop');
 if(process.env.AMBIENT_USER_DATA)app.setPath('userData',path.resolve(process.env.AMBIENT_USER_DATA));
 
@@ -19,8 +20,7 @@ const localRoot = path.resolve(__dirname, '..');
 const trustedIpc=trustedHandlers(ipcMain,()=>win,path.join(localRoot,'ui/index.html'));
 const dataRoot=path.resolve(process.env.AMBIENT_DATA_DIR||(fs.existsSync('D:/AmbMusicNonstop/library.sqlite3')?'D:/AmbMusicNonstop':path.join(app.getPath('userData'),'data')));
 process.env.AMBIENT_DATA_DIR=dataRoot;
-let runtimeLocation;try{runtimeLocation=JSON.parse(fs.readFileSync(path.join(dataRoot,'runtime-location.json'))).root;}catch{}
-const root = path.resolve(process.env.AMBIENT_RUNTIME_DIR||(!app.isPackaged?localRoot:runtimeLocation&&fs.existsSync(runtimeLocation)?runtimeLocation:path.join(dataRoot,'runtime')));
+const root=runtimeRoot({packaged:app.isPackaged,localRoot,dataRoot,override:process.env.AMBIENT_RUNTIME_DIR});
 const python = path.join(root, 'vendor/ACE-Step-1.5/.venv/Scripts/python.exe');
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 if (!app.requestSingleInstanceLock()) app.quit();
@@ -61,6 +61,7 @@ trustedIpc.handle('choose-import',async(_e,kind)=>{
 });
 trustedIpc.handle('hf-help',()=>shell.openExternal('https://huggingface.co/stabilityai/stable-audio-3-medium'));
 trustedIpc.handle('brightness',(_e,request)=>brightness(request));
+trustedIpc.handle('setup-intro',()=>claimSetupIntro(app.getPath('userData')));
 trustedIpc.on('unsaved-settings',(_e,value)=>{unsavedSettings=value===true;});
 trustedIpc.handle('window', (_e, action) => {
   if (action === 'minimize') win.minimize();
@@ -79,12 +80,11 @@ app.whenReady().then(async () => {
     fs.mkdirSync(root,{recursive:true});fs.cpSync(path.join(process.resourcesPath,'backend'),root,{recursive:true});
   }
   const specPath=app.isPackaged?path.join(process.resourcesPath,'runtime.json'):path.join(localRoot,'scripts/runtime-spec.json');
-  const health=await checkRuntime({root,specPath,managed:app.isPackaged});
-  if(!health.ok){
-    preparingRuntime=true;
-    try{const {ensureRuntime}=require('./runtime.cjs');await ensureRuntime({root,localRoot,specPath,reason:health.errors.join('\n')});}
-    catch{app.quit();return;}finally{preparingRuntime=false;}
-  }
+  preparingRuntime=true;
+  try{const {ensureRuntime}=require('./runtime.cjs');await ensureRuntime({root,localRoot,specPath,
+    initialCheck:async signal=>await checkRuntime({root,specPath,managed:app.isPackaged,signal}),
+    claimIntro:()=>claimSetupIntro(app.getPath('userData'))});}
+  catch{preparingRuntime=false;app.quit();return;}
   const p = await port(); base = `http://127.0.0.1:${p}`;
   const logDir = path.join(dataRoot,'.log'); fs.mkdirSync(logDir, { recursive:true });
   const logPath = path.join(logDir,'service.log');
@@ -98,6 +98,8 @@ app.whenReady().then(async () => {
   if (!ready) { dialog.showErrorBox('声音服务未能启动', '请查看 '+logPath); app.quit(); return; }
   win = new BrowserWindow({ width:1440,height:900,minWidth:980,minHeight:650,title:'栖声 · Ambient Music Nonstop',icon:path.join(__dirname,'icon.ico'),backgroundColor:'#20292e',autoHideMenuBar:true,
     webPreferences:{ preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,backgroundThrottling:false } });
+  // Keep the handoff alive until the player window actually exists.
+  preparingRuntime=false;
   secureWindow(win,path.join(localRoot,'ui/index.html'),{allowAudioOutput:true});
   win.on('close',e=>{if(migrationBusy&&!quitting)e.preventDefault();else if(unsavedSettings){e.preventDefault();win.webContents.send('close-requested');}});
   win.loadFile(path.join(localRoot,'ui/index.html'));

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "files": [
     {
       "path": ".gitattributes",
@@ -24,8 +24,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 9307,
-      "sha256": "ca74118c86b927178ea53e0dcdae3aa84681f22c383d6528e9a1af822e4f197e"
+      "bytes": 10015,
+      "sha256": "aa5a4222c8218e989865edbb6486cf51ff0e5a43b437b74266c4fdcdb684fa61"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -129,28 +129,43 @@
     },
     {
       "path": "desktop/main.cjs",
-      "bytes": 7861,
-      "sha256": "cba68bea62f8e3002e69a917ffd5218b031f5ad3d125cb27d1cb5b763062acd1"
+      "bytes": 7922,
+      "sha256": "b1be82008a99a23b72e41b38dbb1cc4742e6cea373a098c6ddf4ae7683ebd1b5"
     },
     {
       "path": "desktop/preload.cjs",
-      "bytes": 1073,
-      "sha256": "568f0c710015ef1f05a9ebb30fc0359a889469d15754439cad62fc9c60746495"
+      "bytes": 1133,
+      "sha256": "1c23f999c3726dbe7dcdf6f069d5992be9c8c5e201995253b8ef5f9ecf43280d"
+    },
+    {
+      "path": "desktop/runtime-device.cjs",
+      "bytes": 233,
+      "sha256": "253a79f871b8cae8dbb365f68b569d1f1b9dcb154388b11924e52f033d06341e"
     },
     {
       "path": "desktop/runtime-health.cjs",
-      "bytes": 1093,
-      "sha256": "0a84a7d18d3d49c56fd4efa7c7bf93764cff16fdd768e754b7d1b9608a72c313"
+      "bytes": 1332,
+      "sha256": "6671b41db34179250c5b4ad62d052a271d61b8161f2c011818a6dc0ba82eea89"
+    },
+    {
+      "path": "desktop/runtime-location.cjs",
+      "bytes": 564,
+      "sha256": "8579b1069ff98359fd46c99829c795ba92cb9bc09b203b4bba10a9ad926babc6"
     },
     {
       "path": "desktop/runtime-preload.cjs",
-      "bytes": 364,
-      "sha256": "8d5d008c93be268599ab3ccbed2ec903eceed926f0f113179ca329c0be1b7819"
+      "bytes": 453,
+      "sha256": "28cc2e4be7a7f5ae0a1564869f1eb6d91838e912df67204974d6260af78ac18b"
+    },
+    {
+      "path": "desktop/runtime-progress.cjs",
+      "bytes": 923,
+      "sha256": "2898d0c752c50494afb5ea97d9322bb02257496dc201c7d487edbff01af074b3"
     },
     {
       "path": "desktop/runtime.cjs",
-      "bytes": 2913,
-      "sha256": "6cf04362fe23afc141bbd8faac23d65393e44e09b4a0b9632d70de13d3e0af5e"
+      "bytes": 4390,
+      "sha256": "fc7848a80dab5008f19d6ae510abefa4454411b6862c06a1173d3edd84a2bc4a"
     },
     {
       "path": "desktop/security.cjs",
@@ -164,18 +179,23 @@
     },
     {
       "path": "docs/CLEAN_WINDOWS_ACCEPTANCE.md",
-      "bytes": 5034,
-      "sha256": "d4631acd12136a7283e2d6eb65ac603de55a6c8e87ebf7debe6abc8801053be8"
+      "bytes": 5860,
+      "sha256": "16fcaafe2f2ac678a8fbec6e77271f967fa7d1b232266a758dee26ee4f96dedb"
     },
     {
       "path": "docs/PUBLIC_RELEASE_CHECKLIST.md",
       "bytes": 3676,
-      "sha256": "0a20ba935cc5a34620aaa15555e759ecab46fe7ece4a58632c964aafeaf67677"
+      "sha256": "ada65bf9d57e71b8233aa3fa7e66bc13d2e71d08496e1eadac56e3c6d64813a8"
     },
     {
       "path": "docs/RECOVERY_AND_UPGRADE.md",
-      "bytes": 5883,
-      "sha256": "11fbe6bf269926e00c9feb272123b18b6417e9ca52baa5b271ae282e6477a9c1"
+      "bytes": 6766,
+      "sha256": "3472abd53aae94abcb70c22c7b1c7c557006c6276a1476b71f25135dfe68c93f"
+    },
+    {
+      "path": "docs/RELEASE_NOTES_1.0.1.md",
+      "bytes": 3121,
+      "sha256": "75ebd870bd93de9d56bb11fd503f488fff419991c33a47c3466ac5e449a22d28"
     },
     {
       "path": "docs/RELEASE_NOTES_1.0.md",
@@ -230,12 +250,12 @@
     {
       "path": "package-lock.json",
       "bytes": 25776,
-      "sha256": "bfa6701bf8382575079b8d8aba79443a8002f633705a00387d69e66470be42c4"
+      "sha256": "affd390b9e3d46095b2f8c13ed1daad537f8d9c7a3dad7ec22971cf84e7a2119"
     },
     {
       "path": "package.json",
       "bytes": 715,
-      "sha256": "b54e7989cf4840303d87cd2b693b65144bc7b221a46042c952624ac1c947b263"
+      "sha256": "39a539d45cfde8a8ea7fd76ee52303369653e75c32cb34f4f61c0c7c4d3534db"
     },
     {
       "path": "pytest.ini",
@@ -264,18 +284,23 @@
     },
     {
       "path": "scripts/install-runtime.ps1",
-      "bytes": 7142,
-      "sha256": "112c339b28afa3f5c336802467acf41ac346664e7b544367d73f50d120b7e71b"
+      "bytes": 9661,
+      "sha256": "d85f10c1f053764e06075062c294ad78b2256a899e1303ee107732abb866900c"
+    },
+    {
+      "path": "scripts/onboarding-check.cjs",
+      "bytes": 11296,
+      "sha256": "3fc9d00adb318c17ea8462110a8faa67f7e3aa77b83ad6b8e5bdaf4bd583fd1b"
     },
     {
       "path": "scripts/package.cjs",
-      "bytes": 2765,
-      "sha256": "f21b75dc9c1cc1924d70a64c879042efb58c7b9efcd8a9ae2700e3bbcaced23f"
+      "bytes": 2790,
+      "sha256": "48671bcfc4d1318d3946489e574c73bf56db8d99f3337643a1d797bd96eac6c9"
     },
     {
       "path": "scripts/public-files.json",
-      "bytes": 5686,
-      "sha256": "2c14ab370b93d88f94601a5490824b4aa56765f4667545a359aed6b7b2369690"
+      "bytes": 5951,
+      "sha256": "f1beadf4616010e612e3604f9d5805a99abcafb6a1b02d350e8ba6a735730a0f"
     },
     {
       "path": "scripts/qc_worker.py",
@@ -320,7 +345,7 @@
     {
       "path": "scripts/runtime_health.py",
       "bytes": 10037,
-      "sha256": "1bbe366143f505244c563e660189b792983ce259c75ed3ec45f0c0595540dddb"
+      "sha256": "b703bab80f1de2f6480134ee4f46f596af09447f9b32db3476e75185b46ee37b"
     },
     {
       "path": "scripts/sa3_audition.py",
@@ -329,8 +354,8 @@
     },
     {
       "path": "scripts/smoke-desktop.cjs",
-      "bytes": 3909,
-      "sha256": "fb75f4f10778005ec83cef556495fd586ebd83cedc0f4614da5591e854338dfe"
+      "bytes": 4235,
+      "sha256": "a758a45ff2d7f5a082964d93f435ce96f1ac97ee3a64d02e2bdcc2c0ffb50eaf"
     },
     {
       "path": "scripts/smoke-fixture.py",
@@ -349,8 +374,8 @@
     },
     {
       "path": "scripts/verify-package.cjs",
-      "bytes": 4922,
-      "sha256": "4075ed9b5beaca33dda77846873abcb4ebab41ad4c70fe67ef8bd7a2d1cb7a71"
+      "bytes": 4952,
+      "sha256": "b6a38bc561448d19bf9540985985c877a518633c3e82b7e7aa0810e62ed5ee0b"
     },
     {
       "path": "scripts/verify-public-index.cjs",
@@ -449,8 +474,8 @@
     },
     {
       "path": "server/provisioning.py",
-      "bytes": 15175,
-      "sha256": "8f7ac25ed2a22f288d3381ae4b216c6b2ac12736169d895cb2e320d2503063a6"
+      "bytes": 15815,
+      "sha256": "5aae10ff2304dbe0561076aeeedaf5342972a764ca936e6f735bb6a87d6724ca"
     },
     {
       "path": "server/qc.py",
@@ -499,8 +524,13 @@
     },
     {
       "path": "tests/runtime-health.test.cjs",
-      "bytes": 1082,
-      "sha256": "35e255642c95f668e73748d22173ac766928b704676d9c0059820d9e92261810"
+      "bytes": 1464,
+      "sha256": "e2a1ca741f2fc705e259690308867baed4844a37b4b08c501b8466f754e367e2"
+    },
+    {
+      "path": "tests/runtime-progress.test.cjs",
+      "bytes": 2778,
+      "sha256": "ef2251117ab1a1134c4ddc501f417b1f60d9b9fac9b41ad2add3954939d598fc"
     },
     {
       "path": "tests/startup-recovery.test.cjs",
@@ -554,13 +584,13 @@
     },
     {
       "path": "tests/test_runtime_installer.py",
-      "bytes": 3102,
-      "sha256": "15b1b47946fdfd88e7f70244f3753639d6b27f4e622687656900ca5da8d27747"
+      "bytes": 3830,
+      "sha256": "67e70b06397d1819dbc0c65a8b307e9916f30380107fec1f7f11c796909170d2"
     },
     {
       "path": "tests/test_settings_v11.py",
-      "bytes": 7727,
-      "sha256": "a25c2d5668d6433e5c3113467fdd4314c87cc4174c8f1cf2aa42670e23e23444"
+      "bytes": 9537,
+      "sha256": "667c41826e537e9207aa4bcddd8543e7e11e17957e0297697ca7fea91ff3f6ac"
     },
     {
       "path": "tests/test_settings_v12.py",
@@ -859,8 +889,8 @@
     },
     {
       "path": "ui/index.html",
-      "bytes": 9499,
-      "sha256": "b5ffd8730edd7b6cc49028e97b3dae8397f1ab816b17a360f3c63622ba08c131"
+      "bytes": 9544,
+      "sha256": "4f4e35097bb5aa589aa02024253e44723dc0ad0e761a34a9bdea683bdd66c04f"
     },
     {
       "path": "ui/library-settings.js",
@@ -876,6 +906,16 @@
       "path": "ui/motion.js",
       "bytes": 11624,
       "sha256": "d7d8568206911bde7fb4fd1ab686badd8aa00b6be35b903d15a582d463870ba3"
+    },
+    {
+      "path": "ui/onboarding.css",
+      "bytes": 4954,
+      "sha256": "b59d8dbfa58b2fb410ba88660a070b01e0c1cc06f7dd571c3d46155f82630bfc"
+    },
+    {
+      "path": "ui/onboarding.js",
+      "bytes": 5558,
+      "sha256": "3a467562436b3422d0e4a80b7c5ceb8782719b7dd712a59ecf01c006fa7b4973"
     },
     {
       "path": "ui/output-devices.js",
@@ -899,18 +939,18 @@
     },
     {
       "path": "ui/runtime-ui.js",
-      "bytes": 964,
-      "sha256": "71de0af3787657a0a74ae087b25f3ce9297e94d8d493919c39f97204d1642636"
+      "bytes": 4462,
+      "sha256": "fae4b70d7421f1454ce4fadbfb0ab344bc8d7f377e61bdf0b1bd973015da4427"
     },
     {
       "path": "ui/runtime.css",
-      "bytes": 758,
-      "sha256": "ee7c0726050318404f8a9cad3fe7f6c9cbd811b54a1fae2d6139fd03bf1bdbd4"
+      "bytes": 2407,
+      "sha256": "9f8cd9e3d5148f46204c7666e56702445e89af65694fe0bf25dc94fbf6093c6e"
     },
     {
       "path": "ui/runtime.html",
-      "bytes": 1244,
-      "sha256": "b545bdc8ce564875a220150367cc3424fdd6ce787ef8266d5bb2d29495dedae9"
+      "bytes": 2223,
+      "sha256": "a454d63be48c15bea315cefeae277791426b3a91cc05aed6804c6c34f77bc2c5"
     },
     {
       "path": "ui/scenes.js",
@@ -934,8 +974,8 @@
     },
     {
       "path": "ui/setup.js",
-      "bytes": 9977,
-      "sha256": "eded97b37a100219c8d83ebd59b67fdcb148bf9419153e012407e9ff2e61b0ba"
+      "bytes": 12250,
+      "sha256": "e64edc32916754c56b3c7d7cfaecd04107fc7ba49f4f41d61b8ceefabee27d65"
     },
     {
       "path": "ui/shared-transport.js",

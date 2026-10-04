@@ -11,7 +11,11 @@ if(!args['--runtime']||!args['--output']||!['fresh','player','corrupt','partial'
  const app=await electron.launch({...launch,env:{...process.env,AMBIENT_NO_WORKER:'1',AMBIENT_DATA_DIR:data,AMBIENT_RUNTIME_DIR:runtime,AMBIENT_USER_DATA:path.join(data,'profile')},timeout:240000});
  let page;
  try{
-  page=await app.firstWindow({timeout:240000});page.setDefaultTimeout(30000);page.on('pageerror',e=>report.errors.push(e.message));
+  // Startup now has a visible runtime-health window before the player window.
+  const deadline=Date.now()+240000;
+  while(!page&&Date.now()<deadline){page=app.windows().find(p=>/\/ui\/index\.html$/.test(p.url().replaceAll('\\','/')));if(!page)await new Promise(r=>setTimeout(r,200));}
+  if(!page)throw Error('Main application window did not open after runtime checks');
+  page.setDefaultTimeout(30000);page.on('pageerror',e=>report.errors.push(e.message));
   if(['corrupt','partial'].includes(mode)){await page.waitForSelector('#config-recovery[open]');report.configRecoveryVisible=true;await page.locator('#config-recovery button').click();}
   if(mode!=='player'){await page.waitForSelector('#first-setup[open]');report.firstSetupVisible=true;}
   else{

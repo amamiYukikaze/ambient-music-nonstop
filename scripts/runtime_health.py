@@ -141,7 +141,7 @@ def check_runtime(root, spec_path, managed=True, complete_install=False):
             environment_spec(spec, name, scripts)
             python = root / environment['executable']
             result = json.loads(command([python, scripts / 'runtime_health.py', '--root', root,
-                                         '--spec', spec_path, '--probe', name], root, timeout=120,json_probe=True))
+                                         '--spec', spec_path, '--probe', name], root, timeout=300,json_probe=True))
             checks[name] = result
             errors.extend(f'{name}: {message}' for message in result['errors'])
         except Exception as exc:

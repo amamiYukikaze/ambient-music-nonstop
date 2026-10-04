@@ -1,0 +1,42 @@
+/* One viewport-sized surface, never a copied or tiled background patch. */
+:root{--setup-bg:radial-gradient(ellipse at 85% 0%,#3d5364 0,transparent 62%),linear-gradient(135deg,#152e39,#172631 75%);--setup-gold:#e7d1a6;--setup-muted:#b2c3c9}
+.setup-page.management-page{box-sizing:border-box;inset:0;width:100%;height:100%;max-width:none;max-height:none;background:var(--setup-bg);background-repeat:no-repeat;transform:none;transition:opacity 200ms var(--ease);isolation:isolate}
+.setup-page::backdrop{background:#152a35}
+.setup-page .setup-orbit{animation:none}
+.setup-page [hidden]{display:none!important}
+.setup-page .setup-progress-card{padding:22px 24px;overflow:visible}
+.setup-page .setup-log-group{padding:0;overflow:visible}
+.setup-progress-card{margin:24px 0 16px;padding:22px 24px;border:1px solid #e4e6d923;border-radius:22px;background:#091d2538;color:#e9e2d4;min-width:0}
+.setup-progress-heading{display:flex;justify-content:space-between;align-items:baseline;gap:20px}
+.setup-summary{font-size:15px;line-height:1.7;min-height:26px;margin:0}
+.setup-step-count{font-size:11px;color:var(--setup-gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+.setup-meter{position:relative;height:6px;overflow:hidden;border-radius:6px;background:#c7dadc20;margin:18px 0 12px}
+.setup-meter>span{display:block;position:absolute;inset:0;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#9fbcc6,var(--setup-gold));transition:transform 160ms linear}
+.setup-meter[data-measured=false][data-active=true]>span{width:32%;transform:none;animation:setup-working 1.8s linear infinite}
+.setup-meter[data-active=false][data-measured=false]>span{transform:scaleX(0)}
+.setup-metrics{font-size:12px;min-height:22px;line-height:1.8;overflow-wrap:anywhere;color:var(--setup-muted);font-variant-numeric:tabular-nums;margin:0}
+.setup-progress-card[data-error=true] .setup-summary{color:#efb7a1}
+.setup-logs{margin-top:14px;border-top:1px solid #ffffff12}
+.setup-logs summary{cursor:pointer;padding:14px 0 0;color:var(--setup-gold);font-size:12px;list-style:none;width:fit-content}
+.setup-logs summary::before{content:'＋';display:inline-block;margin-right:9px}
+.setup-logs[data-expanded=true] summary::before{content:'−'}
+.logs-open,.setup-logs[data-expanded=true] .logs-closed{display:none}.setup-logs[data-expanded=true] .logs-open{display:inline}
+.log-count{margin-left:12px;color:#91a7b0;font-size:10px}
+.setup-log-reveal{overflow:hidden}
+.setup-log-scroll{max-height:230px;overflow:auto;margin-top:14px;scrollbar-gutter:stable;padding-right:10px}
+.setup-log-group+section{margin-top:18px}
+.setup-log-group h4{font-size:11px;letter-spacing:.7px;font-weight:400;color:var(--setup-gold);margin:0 0 8px}
+.setup-log-group p{font:11px/1.8 Consolas,'Microsoft YaHei UI',monospace;margin:2px 0;white-space:pre-wrap;overflow-wrap:anywhere;color:#aebfc6}
+.setup-log-group p[data-level=warning]{color:#e6c490}.setup-log-group p[data-level=error]{color:#efb7a1}
+.setup-intro{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;z-index:100;overflow:hidden;animation:setup-light-out 1000ms var(--ease) both}
+.setup-intro img{width:140px;height:140px;animation:setup-crane 1000ms var(--ease) both}
+.intro-halo{position:absolute;width:min(80vw,650px);aspect-ratio:1;border:1px solid #e8d7b757;border-radius:50%;background:radial-gradient(circle,#f1d9a524,transparent 65%);box-shadow:0 0 0 35px #dbe9eb08,0 0 0 100px #e2dac706;animation:setup-halo 1000ms var(--ease) both}
+.setup-enter>header,.setup-enter>.runtime-content{animation:setup-content-enter 900ms var(--ease) 80ms both}
+@keyframes setup-crane{0%{opacity:0;transform:translate3d(0,40px,0) scale(.92) rotate(-12deg)}45%{opacity:1;transform:translate3d(0,-15px,0) scale(1.08) rotate(3deg)}100%{opacity:0;transform:translate3d(0,-70px,0) scale(1.15) rotate(0)}}
+@keyframes setup-halo{from{opacity:0;transform:scale(.9) rotate(-12deg)}40%{opacity:1}to{opacity:0;transform:scale(1.35) rotate(12deg)}}
+@keyframes setup-light-out{0%,75%{opacity:1}100%{opacity:0}}
+@keyframes setup-content-enter{from{opacity:0;transform:translate3d(0,25px,0)}to{opacity:1;transform:none}}
+@keyframes setup-working{from{transform:translateX(-110%)}to{transform:translateX(420%)}}
+@media(max-width:700px){.setup-progress-card{padding:18px}.setup-progress-heading{align-items:flex-start;gap:10px}.setup-summary{font-size:14px}.setup-page .requirement-grid{grid-template-columns:1fr}.setup-page.management-page{padding:24px}.setup-steps{gap:12px}}
+@media(prefers-reduced-motion:reduce){.setup-intro{animation:setup-light-out 180ms ease both}.setup-intro img,.intro-halo{animation:none;opacity:0}.setup-enter>header,.setup-enter>.runtime-content{animation:none}.setup-meter>span{transition:none}.setup-meter[data-measured=false][data-active=true]>span{animation:none;transform:translateX(100%);opacity:.5}}
+body.reduced .setup-intro{display:none}body.reduced .setup-enter>header{animation:none}

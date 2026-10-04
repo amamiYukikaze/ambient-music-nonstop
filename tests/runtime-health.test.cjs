@@ -13,3 +13,8 @@ test('both startup and install completion use the same health gate',()=>{
  const runtime=fs.readFileSync(path.join(__dirname,'../desktop/runtime.cjs'),'utf8');
  assert.match(main,/await checkRuntime\(/);assert.match(runtime,/await checkRuntime\(/);
 });
+test('closing setup can cancel a health check before Python is launched',async()=>{
+ const {checkRuntime}=require('../desktop/runtime-health.cjs');const controller=new AbortController();controller.abort();
+ const result=await checkRuntime({root:os.tmpdir(),specPath:'unused',signal:controller.signal});
+ assert.equal(result.ok,false);assert.match(result.errors[0],/cancelled/);
+});
